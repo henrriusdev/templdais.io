@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v3/middleware/adaptor"
 	"github.com/hbourgeot/templdais.io/views"
 	"github.com/hbourgeot/templdais.io/views/layout"
+	"github.com/hbourgeot/templdais.io/views/pages"
 )
 
 func Render(c fiber.Ctx, component templ.Component, options ...func(*templ.ComponentHandler)) error {
@@ -19,4 +20,16 @@ func Render(c fiber.Ctx, component templ.Component, options ...func(*templ.Compo
 
 func home(c fiber.Ctx) error {
 	return Render(c, views.Home())
+}
+
+func components(c fiber.Ctx) error {
+	component := c.Params("component", "accordion")
+
+	var page templ.Component
+	switch component {
+	case "accordion":
+		page = pages.AccordionPage()
+	}
+
+	return Render(c, layout.Components(page))
 }

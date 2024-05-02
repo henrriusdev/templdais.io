@@ -22,6 +22,7 @@ func main() {
 	})
 
 	app.Get("/", home)
+	app.Get("/components/:component", components)
 
 	log.Fatal(app.Listen(":3000"))
 }

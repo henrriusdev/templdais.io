@@ -1,0 +1,63 @@
+package layout
+
+import "github.com/hbourgeot/templdais"
+
+var menu = templdais.MenuAttrs{
+	Items: []templdais.MenuItem{
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
+		{Text: "string final", Link: templ.SafeURL("/"), Class: "w-full"},
+	},
+	Vertical: true,
+	Size: "lg",
+	Responsive: false,
+	Class: "bg-base-600 w-1/5 fixed top-0 left-0 w-64 h-screen overflow-x-hidden !overflow-y-auto !flex !flex-col !flex-nowrap",
+}
+
+css Section(){
+	min-height: calc(100vh - 71px);
+}
+
+templ Components(components ...templ.Component) {
+	<section class={"flex justify-start gap-4 w-full relative", Section()}>
+		@templdais.Menu(menu)
+    for _, c := range components {
+      @c
+    }
+	</section>
+}
