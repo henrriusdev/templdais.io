@@ -10,6 +10,20 @@ import "context"
 import "io"
 import "bytes"
 
+import "github.com/hbourgeot/templdais"
+
+var nav = templdais.NavbarAttrs{
+	Brand: "primary",
+	Title: "TemplDais",
+	Items: []templdais.Links{
+		{Text: "Docs", Href: "/docs"},
+		{Text: "Components", Href: "/components"},
+		{Text: "GitHub", Href: "https://github.com/hbourgeot/templdais"},
+	},
+	Centered: true,
+	Class:    "bg-primary",
+}
+
 func Base(children ...templ.Component) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
@@ -23,7 +37,11 @@ func Base(children ...templ.Component) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\" data-theme=\"darkblue\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"refresh\" content=\"5\"><title>Hello world!</title><link href=\"/static/css/tailwind.css\" rel=\"stylesheet\"></head><body>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\" data-theme=\"darkblue\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"refresh\" content=\"5\"><title>Hello world!</title><link href=\"/static/css/tailwind.css\" rel=\"stylesheet\"></head><body><main class=\"w-full flex-col items-center justify-center\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Navbar(nav).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -33,7 +51,7 @@ func Base(children ...templ.Component) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- htmx --><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script></body></html>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</main><!-- htmx --><script src=\"https://unpkg.com/htmx.org@1.9.10\"></script></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

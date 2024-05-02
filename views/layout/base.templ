@@ -1,5 +1,19 @@
 package layout
 
+import "github.com/hbourgeot/templdais"
+
+var nav = templdais.NavbarAttrs{
+	Brand: "primary",
+	Title: "TemplDais",
+	Items: []templdais.Links{
+		{Text: "Docs", Href: "/docs"},
+		{Text: "Components", Href: "/components"},
+		{Text: "GitHub", Href: "https://github.com/hbourgeot/templdais"},
+	},
+	Centered: true,
+	Class:    "bg-primary",
+}
+
 templ Base(children ...templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en" data-theme="darkblue">
@@ -11,9 +25,12 @@ templ Base(children ...templ.Component) {
 			<link href="/static/css/tailwind.css" rel="stylesheet"/>
 		</head>
 		<body>
-			for _, child := range children {
-				@child
-			}
+			<main class="w-full flex-col items-center justify-center">
+				@templdais.Navbar(nav)
+				for _, child := range children {
+					@child
+				}
+			</main>
 			<!-- htmx -->
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 		</body>
