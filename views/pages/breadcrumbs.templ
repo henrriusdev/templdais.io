@@ -1,7 +1,98 @@
 package pages
 
+import "github.com/hbourgeot/templdais"
+
+var accordionBC = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewBC(), Open: true},
+		{Title: "Code", Content: CodeBC()},
+		{Title: "Attributes", Content: AttributesBC()},
+	},
+	Name:  "accordion",
+	Arrow: true,
+}
+
+var tableBreadCrumb = templdais.TableAttrs{
+	TableName: "templdais.BreadCrumbs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the breadcrumbs, can be sm, md, lg and xl", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]Link", "Description": "The list of links", "Default": "nil"},
+	},
+	Class: "bg-secondary",
+}
+
+var tableLinks = templdais.TableAttrs{
+	TableName: "templdais.Link",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Text", "Type": "string", "Description": "Text to show", "Default": "empty"},
+		{"Attribute": "Href", "Type": "templ.SafeURL", "Description": "URL to go", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+var previewItems = []templdais.Links{
+	{Text: "Home", Href: templ.SafeURL("#")},
+	{Text: "Docs", Href: templ.SafeURL("#")},
+	{Text: "Breadcrumb", Href: templ.SafeURL("#")},
+}
+
+templ PreviewBC() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex justify-center items-center">
+			@templdais.Breadcrumbs("sm", previewItems)
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/breadcrumbs"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeBC() {
+	<article>
+		<pre
+			class="w-full"
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go w-full">
+				{ 
+`var previewItems = []templdais.Links{
+	{Text: "Home", Href: templ.SafeURL("#")},
+	{Text: "Docs", Href: templ.SafeURL("#")},
+	{Text: "Breadcrumb", Href: templ.SafeURL("#")},
+}
+	
+templ MyComponent() {
+	// ...
+	// size can be "sm", "md", "lg", "xl"
+	@templdais.Breadcrumbs("lg", previewItems)
+	// ...
+}` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesBC() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.BreadCrumbs</h2>
+		@templdais.Table(tableBreadCrumb)
+	</article>
+	<article class="my-3">
+		<h2 class="text-md italic font-semilight">templdais.Link</h2>
+		@templdais.Table(tableLinks)
+	</article>
+}
+
 templ BreadcrumbPage() {
-	<div class="p-4">
-		<h1 class="text-2xl font-bold">Breadcrumbs Page</h1>
-	</div>
+	<div class="hidden lg:w-4/5"></div>
+	<table class="hidden table table-zebra"></table>
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">BreadCrumb</h1>
+		@templdais.Accordion(accordionBC)
+	</section>
 }

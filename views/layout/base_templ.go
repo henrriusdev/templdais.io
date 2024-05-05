@@ -37,7 +37,7 @@ func Base(children ...templ.Component) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\" data-theme=\"darkblue\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"refresh\" content=\"40\"><title>Hello world!</title><link href=\"/static/css/tailwind.css\" rel=\"stylesheet\"><link href=\"/static/css/prism.css\" rel=\"stylesheet\"></head><body data-prismjs-copy-timeout=\"500\"><main class=\"w-full flex-col items-center justify-center\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\" data-theme=\"darkblue\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"refresh\" content=\"40\"><title>Hello world!</title><link href=\"/static/css/tailwind.css\" rel=\"stylesheet\"><link href=\"/static/css/prism.css\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css\"></head><body data-prismjs-copy-timeout=\"500\"><main class=\"w-full flex-col items-center justify-center\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

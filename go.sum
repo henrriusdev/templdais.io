@@ -38,6 +38,8 @@ github.com/hbourgeot/templdais v1.1.7-0.20240505025657-f8c0c845039c h1:p1FZoY7f5
 github.com/hbourgeot/templdais v1.1.7-0.20240505025657-f8c0c845039c/go.mod h1:45JYC/K13iF+YW0Z6BfcXSIsKE384t61Yb9OzEgL8sc=
 github.com/hbourgeot/templdais v1.2.1 h1:70dMRfnuCirJx+3d/qR2AwUTefyulgZfjzEyC46IPHw=
 github.com/hbourgeot/templdais v1.2.1/go.mod h1:45JYC/K13iF+YW0Z6BfcXSIsKE384t61Yb9OzEgL8sc=
+github.com/hbourgeot/templdais v1.2.2 h1:CmGXUgVWPoZssGZ0a9HdlzCVPBXhEuD5oUBbj6mfj4U=
+github.com/hbourgeot/templdais v1.2.2/go.mod h1:45JYC/K13iF+YW0Z6BfcXSIsKE384t61Yb9OzEgL8sc=
 github.com/klauspost/compress v1.17.8 h1:YcnTYrq7MikUT7k0Yb5eceMmALQPYBW/Xltxn0NAMnU=
 github.com/klauspost/compress v1.17.8/go.mod h1:Di0epgTjJY877eYKx5yC51cX2A2Vl2ibi7bDH9ttBbw=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=

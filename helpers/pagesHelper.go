@@ -37,8 +37,17 @@ func GetComponentPages() []templdais.MenuItem {
 
 		filename := file.Name()
 		if strings.HasSuffix(filename, fileExtension) && !excludeList[filename] {
-			text := CapitalizeFirst(strings.TrimSuffix(filename, fileExtension))
-			link := templ.SafeURL("/components/" + strings.TrimSuffix(filename, fileExtension))
+			var text string
+			file := strings.TrimSuffix(filename, fileExtension)
+			if ContainsCapital(file) {
+				println(file)
+				text = CapitalizeAndSplit(file)
+				println(text)
+			} else {
+				text = CapitalizeFirst(file)
+			}
+
+			link := templ.SafeURL("/components/" + file)
 
 			item := templdais.MenuItem{Text: text, Link: link}
 			items = append(items, item)
