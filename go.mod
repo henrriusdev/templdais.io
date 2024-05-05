@@ -10,7 +10,7 @@ require (
 	github.com/callsamu/templicons v0.0.0-20231116180308-92f3b7e3a431 // indirect
 	github.com/gofiber/utils/v2 v2.0.0-beta.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/hbourgeot/templdais v1.1.2 // indirect
+	github.com/hbourgeot/templdais v1.2.1 // indirect
 	github.com/klauspost/compress v1.17.8 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
