@@ -29,6 +29,16 @@ func components(c fiber.Ctx) error {
 	switch component {
 	case "accordion":
 		page = pages.AccordionPage()
+	case "breadcrumbs":
+		page = pages.BreadcrumbPage()
+	case "button":
+		page = pages.ButtonPage()
+	case "card":
+		page = pages.CardPage()
+	case "menu":
+		page = pages.MenuPage()
+	case "navbar":
+		page = pages.NavbarPage()
 	}
 
 	return Render(c, layout.Components(page))
