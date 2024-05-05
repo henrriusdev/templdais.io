@@ -19,7 +19,7 @@ var menu = templdais.MenuAttrs{
 	Vertical:   true,
 	Size:       "lg",
 	Responsive: false,
-	Class:      "w-1/5 h-screen-page overflow-y-auto !flex-nowrap !px-0",
+	Class:      "w-1/5 h-screen-page overflow-y-auto !flex-nowrap !px-0 sticky top-[5px]",
 }
 
 func Section() templ.CSSClass {
@@ -71,7 +71,7 @@ func Components(components ...templ.Component) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Divider(templdais.DividerAttrs{Vertical: true, Class: "bg-neutral-400 dark:bg-neutral-800 h-screen-page mr-4 w-[3px] rounded-xl"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Divider(templdais.DividerAttrs{Vertical: true, Class: "bg-neutral-400 dark:bg-neutral-800 h-screen mr-4 w-[3px] rounded-xl sticky top-0"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

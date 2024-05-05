@@ -1,7 +1,147 @@
 package pages
 
+import "github.com/hbourgeot/templdais"
+
+var accordionBtn = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewBtn(), Open: true},
+		{Title: "Code", Content: CodeBtn()},
+		{Title: "Attributes", Content: AttributesBtn()},
+	},
+	Name:  "accordion",
+	Arrow: true,
+}
+
+var tableButton = templdais.TableAttrs{
+	TableName: "templdais.Button",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "btn", "Type": "ButtonAttrs", "Description": "Button attributes", "Default": "n/a"},
+		{"Attribute": "attrs", "Type": "templ.Attributes", "Description": "Other HTML attributes for the button or anchor", "Default": "n/a"},
+		{"Attribute": "Content", "Type": "templ.Component", "Description": "Inside the curly braces, you can add any content you want to display inside the button, it can be text, html or other components", "Default": "n/a"},
+	},
+	Class: "bg-secondary",
+}
+
+var tableButtonAttrs = templdais.TableAttrs{
+	TableName: "templdais.ButtonAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Brand", "Type": "string", "Description": "The brand color of DaisyUI (primary, secondary, accent, success, info, error, warning)", "Default": "empty"},
+		{"Attribute": "Type", "Type": "string", "Description": "The type of button (button, anchor)", "Default": "button"},
+		{"Attribute": "Link", "Type": "templ.SafeURL", "Description": "The link to redirect to when the button is clicked", "Default": "empty"},
+		{"Attribute": "Outline", "Type": "bool", "Description": "Whether the button should have an outline or not", "Default": "false"},
+		{"Attribute": "Figure", "Type": "string", "Description": "The figure of the button (circle, square)", "Default": "empty"},
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the button (xsmall, small, medium, large)", "Default": "medium"},
+		{"Attribute": "Active", "Type": "bool", "Description": "Whether the button should be active or not", "Default": "false"},
+		{"Attribute": "Class", "Type": "string", "Description": "Additional classes to add to the button", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewBtn() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-[#132F53] rounded-lg p-10">
+			<p class="text-lg my-2 text-center">Button component preview</p>
+			<div class="flex justify-center items-center gap-x-2">
+				for _, brand := range []string{"", "primary", "secondary", "accent", "success", "info", "warning", "error"} {
+					@templdais.Button(templdais.ButtonAttrs{Type: "button", Brand: brand, Class: "capitalize"}, templ.Attributes{}) {
+						if brand == "" {
+							Default
+						} else {
+							{ brand }
+						}
+					}
+				}
+			</div>
+			<p class="text-lg !my-4 text-center">Button component preview with figure</p>
+			<div class="flex justify-center items-center gap-x-4">
+				for _, figure := range []string{"circle", "square"} {
+					@templdais.Button(templdais.ButtonAttrs{Type: "button", Brand: "primary", Figure: figure, Class: "capitalize"}, templ.Attributes{}) {
+						{ figure }
+					}
+				}
+			</div>
+			<p class="text-lg !my-4 text-center">Button component preview with size</p>
+			<div class="flex justify-center items-center gap-x-3">
+				for _, size := range []string{"xsmall", "small", "medium", "large"} {
+					@templdais.Button(templdais.ButtonAttrs{Type: "button", Brand: "primary", Size: size, Class: "capitalize"}, templ.Attributes{}) {
+						{ size }
+					}
+				}
+			</div>
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/button"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeBtn() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ 
+`
+@templdais.Button(
+	templdais.ButtonAttrs{ Type: "button", Brand: "primary", Outline: true },
+	templ.Attributes{},
+){
+	Click me
+}
+` }
+			</code>
+		</pre>
+		<h2 class="text-lg font-bold">Fragmented code</h2>
+		<pre
+			class="w-full"
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go w-full">
+				{ 
+`var btn = templdais.ButtonAttrs{
+	Type: "anchor",
+	Link: templ.SafeURL("https://daisyui.com/components/button"),
+	Outline: true,
+	Brand: "accent",
+}
+
+var attrs = templ.Attributes{
+	"target": "_blank", // this is an example of adding other HTML attributes
+}
+	
+templ MyComponent() {
+	// ...
+	@templdais.Button(btn, attrs)
+	// ...
+}` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesBtn() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.Button</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableButton)
+	</article>
+	<article class="my-3">
+		<h2 class="text-md italic font-semilight">templdais.ButtonAttrs</h2>
+		@templdais.Table(tableButtonAttrs)
+	</article>
+}
+
 templ ButtonPage() {
-	<div class="p-4">
-		<h1 class="text-2xl font-bold">Button page</h1>
-	</div>
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Button</h1>
+		@templdais.Accordion(accordionBtn)
+	</section>
 }

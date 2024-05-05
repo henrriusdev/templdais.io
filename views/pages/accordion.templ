@@ -118,21 +118,10 @@ templ Attributes() {
 	</article>
 }
 
-templ Usage() {
-	<div>
-		<p class="text-base">The accordion component is used to show and hide content. It is composed of a list of items, each with a title and content. When the title is clicked, the content is shown or hidden.</p>
-		<p class="text-base">The accordion component is composed of the following parts:</p>
-		<ul class="list-disc pl-4">
-			<li class="text-base">Accordion: The main container for the accordion component.</li>
-			<li class="text-base">AccordionItem: A single item in the accordion component. Each item has a title and content.</li>
-		</ul>
-	</div>
-}
-
 templ AccordionPage() {
 	<div class="hidden lg:w-4/5"></div>
 	<section class="p-4 w-full">
-		<h1 class="text-2xl font-bold">Accordion</h1>
+		<h1 class="text-2xl font-bold my-2">Accordion</h1>
 		@templdais.Accordion(accordion)
 	</section>
 }
