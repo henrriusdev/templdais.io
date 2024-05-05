@@ -1,8 +1,6 @@
 package views
 
 import "github.com/hbourgeot/templdais"
-import i "github.com/callsamu/templicons"
-
 css Background() {
 	background-image: url('/static/images/templdais.png');
 	background-size: contain;
@@ -20,7 +18,7 @@ templ Home() {
 					<h1 class="text-5xl font-bold">DaisyUI Components for <a href="https://templ.guide" target="_blank" class="underline font-bolder">Templ</a></h1>
 					<p class="py-6">The first component library for Templ, built with TailwindCSS and DaisyUI, fully customizable.</p>
 					@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("/docs"), Brand: "primary", Size: "lg", Class: "btn btn-primary !mx-auto w-auto"}, templ.Attributes{}) {
-						{ "See docs" } @i.Icon("mdi:chevron-double-right", i.Params().SetDimensions(16, 16))
+						{ "See docs" } <i class="fas fa-chevron-right text-sm"></i>
 					}
 				</section>
 			</article>

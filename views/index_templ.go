@@ -12,7 +12,6 @@ import "bytes"
 import "strings"
 
 import "github.com/hbourgeot/templdais"
-import i "github.com/callsamu/templicons"
 
 func Background() templ.CSSClass {
 	var templ_7745c5c3_CSSBuilder strings.Builder
@@ -72,13 +71,13 @@ func Home() templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs("See docs")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/index.templ`, Line: 23, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/index.templ`, Line: 21, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = i.Icon("mdi:chevron-double-right", i.Params().SetDimensions(16, 16)).Render(ctx, templ_7745c5c3_Buffer)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" <i class=\"fas fa-chevron-right text-sm\"></i>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
