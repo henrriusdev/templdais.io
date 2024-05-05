@@ -48,7 +48,7 @@ templ Preview() {
 			)
 		</section>
 		<section class="w-full flex justify-end !p-3">
-			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/accordion"), Outline: true, Brand: "accent", Figure: "circle", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/accordion"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
 				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
 			}
 		</section>
@@ -70,11 +70,16 @@ templ Code() {
 		>
 			<code class="language-go overflow-x-auto w-fit">
 				{ 
-`@templdais.Accordion(templdais.AccordionAttrs{ Name: "my-accordion", Items: []templdais.AccordionItem{
-	{Title: "Item 1", Content: preview("1")},
-	{Title: "Item 2", Content: preview("2")},
-	{Title: "Item 3", Content: preview("3")},
-}, Arrow: true},
+`@templdais.Accordion(
+	templdais.AccordionAttrs{
+		Name: "my-accordion",
+		Items: []templdais.AccordionItem{
+			{Title: "Accordion Item 1", Content: someComp("1")},
+			{Title: "Accordion Item 2", Content: someComp("2")},
+			{Title: "Accordion Item 3", Content: someComp("3")},
+		},
+		Arrow: true
+	},
 )` }
 			</code>
 		</pre>
@@ -89,9 +94,9 @@ templ Code() {
 `var attrs = templdais.AccordionAttrs{
 	Name: "my-accordion",
 	Items: []templdais.AccordionItem{
-		{Title: "Item 1", Content: preview("1")},
-		{Title: "Item 2", Content: preview("2")},
-		{Title: "Item 3", Content: preview("3")},
+		{Title: "Accordion Item 1", Content: someComp("1")},
+		{Title: "Accordion Item 2", Content: someComp("2")},
+		{Title: "Accordion Item 3", Content: someComp("3")},
 	},
 	Arrow: true
 	}

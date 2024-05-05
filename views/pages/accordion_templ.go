@@ -92,7 +92,7 @@ func Preview() templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/accordion"), Outline: true, Brand: "accent", Figure: "circle", Class: "!px-2"}, templ.Attributes{"target": "_blank"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/accordion"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -163,14 +163,19 @@ func Code() templ.Component {
 		}
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(
-			`@templdais.Accordion(templdais.AccordionAttrs{ Name: "my-accordion", Items: []templdais.AccordionItem{
-	{Title: "Item 1", Content: preview("1")},
-	{Title: "Item 2", Content: preview("2")},
-	{Title: "Item 3", Content: preview("3")},
-}, Arrow: true},
+			`@templdais.Accordion(
+	templdais.AccordionAttrs{
+		Name: "my-accordion",
+		Items: []templdais.AccordionItem{
+			{Title: "Accordion Item 1", Content: someComp("1")},
+			{Title: "Accordion Item 2", Content: someComp("2")},
+			{Title: "Accordion Item 3", Content: someComp("3")},
+		},
+		Arrow: true
+	},
 )`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/accordion.templ`, Line: 78, Col: 2}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/accordion.templ`, Line: 83, Col: 2}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -185,9 +190,9 @@ func Code() templ.Component {
 			`var attrs = templdais.AccordionAttrs{
 	Name: "my-accordion",
 	Items: []templdais.AccordionItem{
-		{Title: "Item 1", Content: preview("1")},
-		{Title: "Item 2", Content: preview("2")},
-		{Title: "Item 3", Content: preview("3")},
+		{Title: "Accordion Item 1", Content: someComp("1")},
+		{Title: "Accordion Item 2", Content: someComp("2")},
+		{Title: "Accordion Item 3", Content: someComp("3")},
 	},
 	Arrow: true
 	}
@@ -198,7 +203,7 @@ templ MyComponent() {
 	// ...
 }`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/accordion.templ`, Line: 103, Col: 2}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/accordion.templ`, Line: 108, Col: 2}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
