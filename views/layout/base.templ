@@ -20,17 +20,20 @@ templ Base(children ...templ.Component) {
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<meta http-equiv="refresh" content="50"/>
+			<meta http-equiv="refresh" content="40"/>
 			<title>Hello world!</title>
 			<link href="/static/css/tailwind.css" rel="stylesheet"/>
+			<link href="/static/css/prism.css" rel="stylesheet"/>
 		</head>
-		<body>
+		<body data-prismjs-copy-timeout="500">
 			<main class="w-full flex-col items-center justify-center">
 				@templdais.Navbar(nav)
 				for _, child := range children {
 					@child
 				}
 			</main>
+			<!-- prism -->
+			<script src="/static/js/prism.js"></script>
 			<!-- htmx -->
 			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 		</body>

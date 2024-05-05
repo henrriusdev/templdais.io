@@ -1,52 +1,14 @@
 package layout
 
 import "github.com/hbourgeot/templdais"
+import "github.com/hbourgeot/templdais.io/helpers"
 
 var menu = templdais.MenuAttrs{
-	Items: []templdais.MenuItem{
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string final", Link: templ.SafeURL("/"), Class: "w-full"},
-	},
+	Items: helpers.GetComponentPages(),
 	Vertical: true,
 	Size: "lg",
 	Responsive: false,
-	Class: "bg-base-600 w-1/5 fixed top-0 left-0 w-64 h-screen overflow-x-hidden !overflow-y-auto !flex !flex-col !flex-nowrap",
+	Class: "w-1/5 h-screen-page overflow-y-auto !flex-nowrap !px-0",
 }
 
 css Section(){
@@ -54,10 +16,14 @@ css Section(){
 }
 
 templ Components(components ...templ.Component) {
-	<section class={"flex justify-start gap-4 w-full relative", Section()}>
+	<section class={"flex justify-start w-full", Section()}>
+	<div class="hidden w-1/3"></div>
 		@templdais.Menu(menu)
+		@templdais.Divider(templdais.DividerAttrs{Vertical: true, Class: "bg-neutral-400 dark:bg-neutral-800 h-screen-page mr-4 w-[3px] rounded-xl"})
+		<div class="w-full">
     for _, c := range components {
       @c
     }
+		</div>
 	</section>
 }

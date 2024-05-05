@@ -87,7 +87,7 @@ func Home() templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "button", Link: templ.SafeURL("/docs"), Brand: "primary", Size: "lg", Class: "btn btn-primary flex items-center justify-between mx-auto"}, templ.Attributes{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("/docs"), Brand: "primary", Size: "lg", Class: "btn btn-primary !mx-auto w-auto"}, templ.Attributes{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

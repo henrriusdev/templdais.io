@@ -12,52 +12,14 @@ import "bytes"
 import "strings"
 
 import "github.com/hbourgeot/templdais"
+import "github.com/hbourgeot/templdais.io/helpers"
 
 var menu = templdais.MenuAttrs{
-	Items: []templdais.MenuItem{
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string", Link: templ.SafeURL("/"), Class: "w-full"},
-		{Text: "string final", Link: templ.SafeURL("/"), Class: "w-full"},
-	},
+	Items:      helpers.GetComponentPages(),
 	Vertical:   true,
 	Size:       "lg",
 	Responsive: false,
-	Class:      "bg-base-600 w-1/5 fixed top-0 left-0 w-64 h-screen overflow-x-hidden !overflow-y-auto !flex !flex-col !flex-nowrap",
+	Class:      "w-1/5 h-screen-page overflow-y-auto !flex-nowrap !px-0",
 }
 
 func Section() templ.CSSClass {
@@ -83,7 +45,7 @@ func Components(components ...templ.Component) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{"flex justify-start gap-4 w-full relative", Section()}
+		var templ_7745c5c3_Var2 = []any{"flex justify-start w-full", Section()}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -101,11 +63,19 @@ func Components(components ...templ.Component) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><div class=\"hidden w-1/3\"></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = templdais.Menu(menu).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Divider(templdais.DividerAttrs{Vertical: true, Class: "bg-neutral-400 dark:bg-neutral-800 h-screen-page mr-4 w-[3px] rounded-xl"}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -115,7 +85,7 @@ func Components(components ...templ.Component) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></section>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
