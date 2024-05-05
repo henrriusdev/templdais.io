@@ -17,12 +17,12 @@ func main() {
 	app.Use(logger.New())
 
 	// serve static folder with fiber
-	app.Static("/static", "./static", fiber.Static{
+	app.Static("/static", "usr/local/bin/static", fiber.Static{
 		Browse: true,
 	})
 
 	app.Get("/", home)
 	app.Get("/components/:component", components)
 
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(":8080"))
 }

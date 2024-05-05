@@ -12,7 +12,7 @@ import (
 func GetComponentPages() []templdais.MenuItem {
 	items := []templdais.MenuItem{}
 	// Directorio que quieres explorar
-	directory := "./views/pages"
+	directory := "usr/local/bin/views/pages"
 
 	// Extensión de los archivos que deseas filtrar
 	fileExtension := ".templ"
