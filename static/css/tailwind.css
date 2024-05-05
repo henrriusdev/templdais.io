@@ -602,6 +602,9 @@ html {
   --su: 55.2026% 0.123397 157.012054;
   --wa: 84.4171% 0.172159 84.933789;
   --er: 59.155% 0.202026 21.238763;
+  fallback-b1: #121212;
+  fallback-b2: #101921;
+  fallback-b3: #021E42;
 }
 
 *, ::before, ::after {
@@ -3679,6 +3682,10 @@ details.collapse summary::-webkit-details-marker {
   margin-left: 2.5rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .mr-4 {
   margin-right: 1rem;
 }
@@ -3719,10 +3726,6 @@ details.collapse summary::-webkit-details-marker {
   width: 6rem;
 }
 
-.w-4\/5 {
-  width: 80%;
-}
-
 .w-5 {
   width: 1.25rem;
 }
@@ -3739,13 +3742,13 @@ details.collapse summary::-webkit-details-marker {
   width: auto;
 }
 
-.w-full {
-  width: 100%;
-}
-
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .max-w-md {
@@ -3808,10 +3811,6 @@ details.collapse summary::-webkit-details-marker {
   overflow-y: auto;
 }
 
-.overflow-x-scroll {
-  overflow-x: scroll;
-}
-
 .rounded-box {
   border-radius: var(--rounded-box, 1rem);
 }
@@ -3839,11 +3838,6 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
 }
 
-.bg-gray-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-
 .bg-neutral-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(163 163 163 / var(--tw-bg-opacity));
@@ -3854,8 +3848,17 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
 }
 
+.bg-secondary {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-s,oklch(var(--s)/var(--tw-bg-opacity)));
+}
+
 .bg-opacity-60 {
   --tw-bg-opacity: 0.6;
+}
+
+.\!p-3 {
+  padding: 0.75rem !important;
 }
 
 .p-10 {
@@ -3873,6 +3876,11 @@ details.collapse summary::-webkit-details-marker {
 .\!px-0 {
   padding-left: 0px !important;
   padding-right: 0px !important;
+}
+
+.\!px-2 {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
 }
 
 .px-1 {
@@ -3901,6 +3909,11 @@ details.collapse summary::-webkit-details-marker {
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .text-lg {
@@ -4023,11 +4036,6 @@ details.collapse summary::-webkit-details-marker {
 }
 
 @media (prefers-color-scheme: dark) {
-  .dark\:bg-gray-800 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-  }
-
   .dark\:bg-neutral-800 {
     --tw-bg-opacity: 1;
     background-color: rgb(38 38 38 / var(--tw-bg-opacity));

@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./views/**/*.templ",
-    "../../go/pkg/mod/github.com/hbourgeot/templdais@v1.2.1/**/*.templ",
+    "../../go/pkg/mod/github.com/hbourgeot/templdais@v1.2.2/**/*.templ",
   ],
   theme: {
     extend: {
@@ -38,6 +38,12 @@ module.exports = {
           success: "#198754", // Un verde oscuro para éxitos
           warning: "#FFC107",
           error: "#DC3545",
+          "fallback-b1":
+            "#121212" /* Gris muy oscuro, casi negro, para el fondo */,
+          "fallback-b2":
+            "#101921" /* Un gris oscuro para elementos neutrales */,
+          "fallback-b3":
+            "#021E42" /* Un azul oscuro para elementos secundarios */,
         },
       },
     ],

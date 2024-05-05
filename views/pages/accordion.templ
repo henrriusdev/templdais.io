@@ -4,8 +4,7 @@ import "github.com/hbourgeot/templdais"
 
 var accordion = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{
-		{Title: "Preview", Content: Preview()},
-		{Title: "Usage", Content: Usage()},
+		{Title: "Preview", Content: Preview(), Open: true},
 		{Title: "Code", Content: Code()},
 		{Title: "Attributes", Content: Attributes()},
 	},
@@ -15,7 +14,7 @@ var accordion = templdais.AccordionAttrs{
 
 var tableAccordionAttrs = templdais.TableAttrs{
 	TableName: "templdais.AccordionAttrs",
-	Columns: []string{"Attribute", "Type", "Description", "Default"},
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
 		{"Attribute": "Name", "Type": "string", "Description": "The name of the accordion component", "Default": "empty"},
 		{"Attribute": "Items", "Type": "[]AccordionItem", "Description": "The list of items in the accordion component", "Default": "nil"},
@@ -23,40 +22,49 @@ var tableAccordionAttrs = templdais.TableAttrs{
 		{"Attribute": "PlusMinus", "Type": "bool", "Description": "Wheter to show a plus/minus icon next to the title", "Default": "false"},
 		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion component", "Default": "empty"},
 	},
-	Zebra: true,
+	Class: "bg-secondary",
 }
 
 var tableAccordionItemAttrs = templdais.TableAttrs{
 	TableName: "templdais.AccordionItem",
-	Columns: []string{"Attribute", "Type", "Description", "Default"},
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
 		{"Attribute": "Title", "Type": "string", "Description": "The title of the accordion item", "Default": "empty"},
 		{"Attribute": "Content", "Type": "templ.Component", "Description": "The content of the accordion item", "Default": "empty"},
+		{"Attribute": "Open", "Type": "bool", "Description": "Whether the accordion item is open by default", "Default": "false"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion item", "Default": "empty"},
 	},
-	Zebra: true,
+	Class: "bg-secondary",
 }
 
 templ Preview() {
-	<div class="ml-10 lg:ml-0 bg-gray-200 dark:bg-gray-800 rounded-lg p-10">
-		@templdais.Accordion(templdais.AccordionAttrs{Name: "my-accordion", Items: []templdais.AccordionItem{
-			{Title: "Item 1", Content: prev("1")},
-			{Title: "Item 2", Content: prev("2")},
-			{Title: "Item 3", Content: prev("3")},
-		}, Arrow: true},
-		)
-	</div>
+	<article>
+		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10">
+			@templdais.Accordion(templdais.AccordionAttrs{Name: "my-accordion", Items: []templdais.AccordionItem{
+				{Title: "Item 1", Content: prev("1")},
+				{Title: "Item 2", Content: prev("2")},
+				{Title: "Item 3", Content: prev("3")},
+			}, Arrow: true},
+			)
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/accordion"), Outline: true, Brand: "accent", Figure: "circle", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
 }
 
 templ prev(number string) {
 	<div>
-		<p class="text-lg">Item { number } content</p>
+		<p class="text-lg">Item n{ number } content</p>
 	</div>
 }
 
 templ Code() {
 	<article>
 		<h2 class="text-lg font-bold">Inline code</h2>
-		<pre 
+		<pre
 			data-prismjs-copy="Copy"
 			data-prismjs-copy-success="Success!"
 		>
@@ -71,7 +79,8 @@ templ Code() {
 			</code>
 		</pre>
 		<h2 class="text-lg font-bold">Fragmented code</h2>
-		<pre class="w-full"
+		<pre
+			class="w-full"
 			data-prismjs-copy="Copy"
 			data-prismjs-copy-success="Success!"
 		>
@@ -100,6 +109,7 @@ templ MyComponent() {
 templ Attributes() {
 	<article>
 		<h2 class="text-md italic font-semilight">templdais.AccordionAttrs</h2>
+		<table class="hidden table table-zebra"></table>
 		@templdais.Table(tableAccordionAttrs)
 	</article>
 	<article class="my-3">
@@ -110,18 +120,17 @@ templ Attributes() {
 
 templ Usage() {
 	<div>
-		<p class="text-lg">The accordion component is used to show and hide content. It is composed of a list of items, each with a title and content. When the title is clicked, the content is shown or hidden.</p>
-		<p class="text-lg">The accordion component is composed of the following parts:</p>
+		<p class="text-base">The accordion component is used to show and hide content. It is composed of a list of items, each with a title and content. When the title is clicked, the content is shown or hidden.</p>
+		<p class="text-base">The accordion component is composed of the following parts:</p>
 		<ul class="list-disc pl-4">
-			<li class="text-lg">Accordion: The main container for the accordion component.</li>
-			<li class="text-lg">AccordionItem: A single item in the accordion component. Each item has a title and content.</li>
+			<li class="text-base">Accordion: The main container for the accordion component.</li>
+			<li class="text-base">AccordionItem: A single item in the accordion component. Each item has a title and content.</li>
 		</ul>
 	</div>
 }
 
 templ AccordionPage() {
 	<div class="hidden lg:w-4/5"></div>
-	<table class="hidden table table-zebra"></table>
 	<section class="p-4 w-full">
 		<h1 class="text-2xl font-bold">Accordion</h1>
 		@templdais.Accordion(accordion)
