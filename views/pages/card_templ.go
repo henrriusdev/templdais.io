@@ -22,27 +22,26 @@ var accordionCard = templdais.AccordionAttrs{
 	Arrow: true,
 }
 
-var tableAccordionCAttrs = templdais.TableAttrs{
-	TableName: "templdais.AccordionAttrs",
+var tableCardAttrs = templdais.TableAttrs{
+	TableName: "templdais.CardAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
-		{"Attribute": "Name", "Type": "string", "Description": "The name of the accordion component", "Default": "empty"},
-		{"Attribute": "Items", "Type": "[]AccordionItem", "Description": "The list of items in the accordion component", "Default": "nil"},
-		{"Attribute": "Arrow", "Type": "bool", "Description": "Whether to show an arrow icon next to the title", "Default": "false"},
-		{"Attribute": "PlusMinus", "Type": "bool", "Description": "Wheter to show a plus/minus icon next to the title", "Default": "false"},
-		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion component", "Default": "empty"},
+		{"Attribute": "Title", "Type": "string", "Description": "The title of the card", "Default": "empty"},
+		{"Attribute": "Description", "Type": "string", "Description": "The description of the card", "Default": "empty"},
+		{"Attribute": "Image", "Type": "string", "Description": "The image of the card", "Default": "empty"},
+		{"Attribute": "ButtonText", "Type": "string", "Description": "The text of the button", "Default": "empty"},
+		{"Attribute": "ButtonLink", "Type": "string", "Description": "The link of the button", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The other classes to apply to the card", "Default": "empty"},
 	},
 	Class: "bg-secondary",
 }
 
-var tableAccordionItemCAttrs = templdais.TableAttrs{
+var tableCard = templdais.TableAttrs{
 	TableName: "templdais.AccordionItem",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
-		{"Attribute": "Title", "Type": "string", "Description": "The title of the accordion item", "Default": "empty"},
-		{"Attribute": "Content", "Type": "templ.Component", "Description": "The content of the accordion item", "Default": "empty"},
-		{"Attribute": "Open", "Type": "bool", "Description": "Whether the accordion item is open by default", "Default": "false"},
-		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion item", "Default": "empty"},
+		{"Attribute": "CardAttrs", "Type": "CardAttrs", "Description": "The attributes of the card", "Default": "empty"},
+		{"Attribute": "ButtonAttrs", "Type": "ButtonAttrs", "Description": "The attributes of the button", "Default": "empty"},
 	},
 	Class: "bg-secondary",
 }
@@ -60,7 +59,19 @@ func PreviewCard() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary rounded-lg p-10\"></section><section class=\"w-full flex justify-end !p-3\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex justify-center items-start gap-x-4\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Card(templdais.CardAttrs{Title: "Hello world!", Description: "This is amazing, right?", ButtonText: "Go to DaisyUI", Class: "w-[400px] bg-red-950"}, templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com"), Brand: "error", Outline: true}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Card(templdais.CardAttrs{Title: "Add images!", Description: "You know that I support images? Add one!", Image: "/static/images/templdais.png", ButtonText: "Go to DaisyUI", Class: "w-[400px] bg-purple-950"}, templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com"), Brand: "error", Outline: true}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section><section class=\" w-full flex justify-end !p-3\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -113,14 +124,23 @@ func CodeCard() templ.Component {
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(
-			`@templdais.Accordion(templdais.AccordionAttrs{ Name: "my-accordion", Items: []templdais.AccordionItem{
-	{Title: "Item 1", Content: preview("1")},
-	{Title: "Item 2", Content: preview("2")},
-	{Title: "Item 3", Content: preview("3")},
-}, Arrow: true},
+			`@templdais.Card(
+	templdais.CardAttrs{
+		Title: "Add images!",
+		Description: "You know that I support images? Add one!",
+		Image: "/static/images/templdais.png",
+		ButtonText: "Go to DaisyUI",
+		Class: "w-[400px]"
+	},
+	templdais.ButtonAttrs{
+		Type: "anchor",
+		Link: templ.SafeURL("https://daisyui.com"),
+		Brand: "error",
+		Outline: true
+	},
 )`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/card.templ`, Line: 67, Col: 2}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/card.templ`, Line: 76, Col: 2}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -132,23 +152,27 @@ func CodeCard() templ.Component {
 		}
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(
-			`var attrs = templdais.AccordionAttrs{
-	Name: "my-accordion",
-	Items: []templdais.AccordionItem{
-		{Title: "Item 1", Content: preview("1")},
-		{Title: "Item 2", Content: preview("2")},
-		{Title: "Item 3", Content: preview("3")},
-	},
-	Arrow: true
-	}
+			`var card = templdais.CardAttrs{
+	Title: "Add images!",
+	Description: "You know that I support images? Add one!",
+	Image: "/static/images/templdais.png",
+	ButtonText: "Go to DaisyUI",
+	Class: "w-[400px]"
+}
+var btn = templdais.ButtonAttrs{
+	Type: "anchor",
+	Link: templ.SafeURL("https://daisyui.com"),
+	Brand: "error",
+	Outline: true
+}
 	
 templ MyComponent() {
 	// ...
-	@templdais.Accordion(attrs)
+	@templdais.Card(card, btn)
 	// ...
 }`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/card.templ`, Line: 92, Col: 2}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/card.templ`, Line: 105, Col: 2}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -178,19 +202,19 @@ func AttributesCard() templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-md italic font-semilight\">templdais.AccordionAttrs</h2><table class=\"hidden table table-zebra\"></table>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-md italic font-semilight\">templdais.Card</h2>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Table(tableAccordionAttrs).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Table(tableCard).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</article><article class=\"my-3\"><h2 class=\"text-md italic font-semilight\">templdais.AccordionItem</h2>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</article><article class=\"my-3\"><h2 class=\"text-md italic font-semilight\">templdais.CardAttrs</h2>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Table(tableAccordionItemAttrs).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Table(tableCardAttrs).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -218,11 +242,11 @@ func CardPage() templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"hidden lg:w-4/5\"></div><section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Card</h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"hidden w-[400px]\"></div><section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Card</h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Accordion(accordion).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Accordion(accordionCard).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

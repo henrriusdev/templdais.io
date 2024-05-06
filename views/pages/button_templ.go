@@ -320,7 +320,7 @@ func ButtonPage() templ.Component {
 			templ_7745c5c3_Var13 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Button</h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><button class=\"hidden btn btn-xs btn-circle btn-outline btn-accent\" id=\"accordion-page\">Toggle all</button> <button class=\"hidden btn btn-secondary\" id=\"accordion-page-open\">Open all</button> <button class=\"hidden btn btn-square btn-warning\" id=\"accordion-page-close\">Close all</button> <button class=\"hidden btn btn-lg btn-info\" id=\"accordion-page-toggle\">Toggle all</button> <button class=\"hidden btn btn-sm btn-success\" id=\"accordion-page-destroy\">Destroy all</button><h1 class=\"text-2xl font-bold my-2\">Button</h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

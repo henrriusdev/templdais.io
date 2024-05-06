@@ -1,0 +1,52 @@
+package layout
+
+import "github.com/hbourgeot/templdais.io/views/partials"
+import "strconv"
+import "strings"
+import "github.com/hbourgeot/templdais"
+
+script goBack() {
+  window.history.back();
+}
+
+templ NotFound(err string) {
+	<button class="hidden btn btn-error">Go back</button>
+	<div class="flex items-center justify-center h-screen-page w-2/3 mx-auto">
+		@partials.GopherSad("w-1/2")
+		<div class="text-center">
+			<h1 class="text-4xl font-bold text-primary-content">Error 404</h1>
+			// delete the parenthesis at the end of the string with the text inside
+			<p class="text-primary-content">{ strings.TrimPrefix(err, "error 404") }</p>
+			@templdais.Button(templdais.ButtonAttrs{
+				Type:  "button",
+				Brand: "error",
+				Size:  "lg",
+				Class: "mt-3",
+				Click: goBack(),
+			}, templ.Attributes{}) {
+				Go back <i class="fas fa-chevron-left ml-2"></i>
+			}
+		</div>
+	</div>
+}
+
+templ Error(status int, err string) {
+	<div class="flex items-center justify-center h-screen-page w-2/3 mx-auto">
+		@partials.GopherPanic("w-1/2")
+		<div class="text-center">
+			<h1 class="text-4xl font-bold text-primary-content">
+				Error { strconv.Itoa(status) }
+			</h1>
+			<p class="text-primary-content">{ strings.TrimPrefix(err, "error " + strconv.Itoa(status)) }</p>
+			@templdais.Button(templdais.ButtonAttrs{
+				Type:  "button",
+				Brand: "error",
+				Size:  "lg",
+				Class: "mt-4",
+				Click: goBack(),
+			}, templ.Attributes{}) {
+				Go back <i class="fas fa-chevron-left ml-2"></i>
+			}
+		</div>
+	</div>
+}

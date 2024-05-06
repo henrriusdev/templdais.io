@@ -1,6 +1,7 @@
 package views
 
 import "github.com/hbourgeot/templdais"
+
 css Background() {
 	background-image: url('/static/images/templdais.png');
 	background-size: contain;
@@ -10,17 +11,17 @@ css Background() {
 }
 
 templ Home() {
-		<header class={ "hero", Background() }>
-			<p class="hidden md:block absolute bottom-1 right-3 text-gray-600 font-semilight text-sm z-[5]">Note: This is built by a Backend Developer, any help is welcome</p>
-			<div class="hero-overlay bg-opacity-60"></div>
-			<article class="hero-content text-center text-neutral-content">
-				<section class="max-w-md lg:max-w-lg">
-					<h1 class="text-5xl font-bold">DaisyUI Components for <a href="https://templ.guide" target="_blank" class="underline font-bolder">Templ</a></h1>
-					<p class="py-6">The first component library for Templ, built with TailwindCSS and DaisyUI, fully customizable.</p>
-					@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("/docs"), Brand: "primary", Size: "lg", Class: "btn btn-primary !mx-auto w-auto"}, templ.Attributes{}) {
-						{ "See docs" } <i class="fas fa-chevron-right text-sm"></i>
-					}
-				</section>
-			</article>
-		</header>
+	<header class={ "hero", Background() }>
+		<p class="hidden md:block absolute bottom-1 right-3 text-gray-600 font-semilight text-sm z-[5]">Note: This is built by a Backend Developer, any help is welcome</p>
+		<div class="hero-overlay bg-opacity-60"></div>
+		<article class="hero-content text-center text-neutral-content">
+			<section class="max-w-md lg:max-w-lg">
+				<h1 class="text-5xl font-bold">DaisyUI Components for <a href="https://templ.guide" target="_blank" class="underline font-bolder">Templ</a></h1>
+				<p class="py-6">The first component library for Templ, built with TailwindCSS and DaisyUI, fully customizable.</p>
+				@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("/docs"), Brand: "primary", Size: "lg", Class: "btn btn-primary !mx-auto w-auto"}, templ.Attributes{}) {
+					{ "See docs" } <i class="fas fa-chevron-right text-sm"></i>
+				}
+			</section>
+		</article>
+	</header>
 }

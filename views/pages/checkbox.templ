@@ -1,8 +1,108 @@
 package pages
 
+import "github.com/hbourgeot/templdais"
+
+var accordionChkbox = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewCb(), Open: true},
+		{Title: "Code", Content: CodeCb()},
+		{Title: "Attributes", Content: AttributesCb()},
+	},
+	Name:  "accordion-page",
+	Arrow: true,
+}
+
+var tableChkboxAttrs = templdais.TableAttrs{
+	TableName: "templdais.FormAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Brand", "Type": "string", "Description": "The brand of the badge", "Default": "empty"},
+		{"Attribute": "Text", "Type": "string", "Description": "The text of the badge (required)", "Default": "empty"},
+		{"Attribute": "Outline", "Type": "bool", "Description": "Whether the badge is outlined", "Default": "false"},
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the badge", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewCb() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-[#000C20] rounded-lg p-10">
+			<label class="flex items-center gap-x-2">
+				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "primary"})
+				<span>I agree to the terms and conditions</span>
+			</label>
+			<label class="flex items-center gap-x-2">
+				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "secondary"})
+				<span>I agree to the terms and conditions</span>
+			</label>
+			<label class="flex items-center gap-x-2">
+				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "accent"})
+				<span>I agree to the terms and conditions</span>
+			</label>
+			<label class="flex items-center gap-x-2">
+				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "success"})
+				<span>I agree to the terms and conditions</span>
+			</label>
+			<label class="flex items-center gap-x-2">
+				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "info", FieldSize: "sm"})
+				<span>I agree to the terms and conditions</span>
+			</label>
+			<label class="flex items-center gap-x-2">
+				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "warning", FieldSize: "lg"})
+				<span>I agree to the terms and conditions</span>
+			</label>
+			<label class="flex items-center gap-x-2">
+				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "error", FieldSize: "xl"})
+				<span>I agree to the terms and conditions</span>
+			</label>
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/alert"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeCb() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `@templdais.Checkbox(
+	templdais.FormAttrs{
+		FieldName: "checkbox",
+		FieldID: "checkbox",
+		FieldBordered: true,
+		},
+)` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesCb() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.FormAttrs</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableBadgeAttrs)
+	</article>
+}
+
 templ CheckboxPage() {
-  <div>
-    <h1>Checkbox</h1>
-    <p>Checkboxes allow the user to select one or more items from a set.</p>
-  </div>
+	<div class="hidden checkbox checkbox-primary"></div>
+	<div class="hidden checkbox checkbox-secondary"></div>
+	<div class="hidden checkbox checkbox-accent"></div>
+	<div class="hidden checkbox checkbox-success"></div>
+	<div class="hidden checkbox checkbox-info"></div>
+	<div class="hidden checkbox checkbox-warning"></div>
+	<div class="hidden checkbox checkbox-error"></div>
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Alert</h1>
+		@templdais.Accordion(accordionChkbox)
+	</section>
 }

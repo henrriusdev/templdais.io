@@ -1,5 +1,81 @@
 package pages
 
-templ BadgePage(){
-  
+import "github.com/hbourgeot/templdais"
+
+var accordionBadge = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewBg(), Open: true},
+		{Title: "Code", Content: CodeBg()},
+		{Title: "Attributes", Content: AttributesBg()},
+	},
+	Name:  "accordion-page",
+	Arrow: true,
+}
+
+var tableBadgeAttrs = templdais.TableAttrs{
+	TableName: "templdais.BadgeAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Brand", "Type": "string", "Description": "The brand of the badge", "Default": "empty"},
+		{"Attribute": "Text", "Type": "string", "Description": "The text of the badge (required)", "Default": "empty"},
+		{"Attribute": "Outline", "Type": "bool", "Description": "Whether the badge is outlined", "Default": "false"},
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the badge", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewBg() {
+	<article>
+		<section class="ml-10 lg:ml-0 dark:bg-[#000C20] rounded-lg p-10 flex justify-center items-center gap-x-3">
+			@templdais.Badge(templdais.BadgeAttrs{Brand: "primary", Text: "Primary"})
+			@templdais.Badge(templdais.BadgeAttrs{Brand: "secondary", Text: "Secondary"})
+			@templdais.Badge(templdais.BadgeAttrs{Brand: "accent", Text: "Accent Outline", Outline: true})
+			@templdais.Badge(templdais.BadgeAttrs{Brand: "info", Text: "Info"})
+			@templdais.Badge(templdais.BadgeAttrs{Brand: "success", Text: "Success"})
+			@templdais.Badge(templdais.BadgeAttrs{Brand: "warning", Text: "Warning"})
+			@templdais.Badge(templdais.BadgeAttrs{Brand: "error", Text: "Error"})
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/alert"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeBg() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `@templdais.Badge(templdais.BadgeAttrs{Brand: "error", Text: "Error"})` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesBg() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.BadgeAttrs</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableBadgeAttrs)
+	</article>
+}
+
+templ BadgePage() {
+	<div class="hidden badge badge-outline badge-primary"></div>
+	<div class="hidden badge badge-xs badge-secondary"></div>
+	<div class="hidden badge badge-accent"></div>
+	<div class="hidden badge badge-info"></div>
+	<div class="hidden badge badge-success"></div>
+	<div class="hidden badge badge-warning"></div>
+	<div class="hidden badge badge-error"></div>
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Alert</h1>
+		@templdais.Accordion(accordionBadge)
+	</section>
 }

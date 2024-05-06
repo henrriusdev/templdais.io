@@ -12,37 +12,37 @@ var accordionCard = templdais.AccordionAttrs{
 	Arrow: true,
 }
 
-var tableAccordionCAttrs = templdais.TableAttrs{
-	TableName: "templdais.AccordionAttrs",
+var tableCardAttrs = templdais.TableAttrs{
+	TableName: "templdais.CardAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
-		{"Attribute": "Name", "Type": "string", "Description": "The name of the accordion component", "Default": "empty"},
-		{"Attribute": "Items", "Type": "[]AccordionItem", "Description": "The list of items in the accordion component", "Default": "nil"},
-		{"Attribute": "Arrow", "Type": "bool", "Description": "Whether to show an arrow icon next to the title", "Default": "false"},
-		{"Attribute": "PlusMinus", "Type": "bool", "Description": "Wheter to show a plus/minus icon next to the title", "Default": "false"},
-		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion component", "Default": "empty"},
+		{"Attribute": "Title", "Type": "string", "Description": "The title of the card", "Default": "empty"},
+		{"Attribute": "Description", "Type": "string", "Description": "The description of the card", "Default": "empty"},
+		{"Attribute": "Image", "Type": "string", "Description": "The image of the card", "Default": "empty"},
+		{"Attribute": "ButtonText", "Type": "string", "Description": "The text of the button", "Default": "empty"},
+		{"Attribute": "ButtonLink", "Type": "string", "Description": "The link of the button", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The other classes to apply to the card", "Default": "empty"},
 	},
 	Class: "bg-secondary",
 }
 
-var tableAccordionItemCAttrs = templdais.TableAttrs{
+var tableCard = templdais.TableAttrs{
 	TableName: "templdais.AccordionItem",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
-		{"Attribute": "Title", "Type": "string", "Description": "The title of the accordion item", "Default": "empty"},
-		{"Attribute": "Content", "Type": "templ.Component", "Description": "The content of the accordion item", "Default": "empty"},
-		{"Attribute": "Open", "Type": "bool", "Description": "Whether the accordion item is open by default", "Default": "false"},
-		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion item", "Default": "empty"},
+		{"Attribute": "CardAttrs", "Type": "CardAttrs", "Description": "The attributes of the card", "Default": "empty"},
+		{"Attribute": "ButtonAttrs", "Type": "ButtonAttrs", "Description": "The attributes of the button", "Default": "empty"},
 	},
 	Class: "bg-secondary",
 }
 
 templ PreviewCard() {
 	<article>
-		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10">
-			
+		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex justify-center items-start gap-x-4">
+			@templdais.Card(templdais.CardAttrs{Title: "Hello world!", Description: "This is amazing, right?", ButtonText: "Go to DaisyUI", Class: "w-[400px] bg-red-950"}, templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com"), Brand: "error", Outline: true})
+			@templdais.Card(templdais.CardAttrs{Title: "Add images!", Description: "You know that I support images? Add one!", Image: "/static/images/templdais.png", ButtonText: "Go to DaisyUI", Class: "w-[400px] bg-purple-950"}, templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com"), Brand: "error", Outline: true})
 		</section>
-		<section class="w-full flex justify-end !p-3">
+		<section class=" w-full flex justify-end !p-3">
 			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/accordion"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
 				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
 			}
@@ -59,11 +59,20 @@ templ CodeCard() {
 		>
 			<code class="language-go overflow-x-auto w-fit">
 				{ 
-`@templdais.Accordion(templdais.AccordionAttrs{ Name: "my-accordion", Items: []templdais.AccordionItem{
-	{Title: "Item 1", Content: preview("1")},
-	{Title: "Item 2", Content: preview("2")},
-	{Title: "Item 3", Content: preview("3")},
-}, Arrow: true},
+`@templdais.Card(
+	templdais.CardAttrs{
+		Title: "Add images!",
+		Description: "You know that I support images? Add one!",
+		Image: "/static/images/templdais.png",
+		ButtonText: "Go to DaisyUI",
+		Class: "w-[400px]"
+	},
+	templdais.ButtonAttrs{
+		Type: "anchor",
+		Link: templ.SafeURL("https://daisyui.com"),
+		Brand: "error",
+		Outline: true
+	},
 )` }
 			</code>
 		</pre>
@@ -75,19 +84,23 @@ templ CodeCard() {
 		>
 			<code class="language-go w-full">
 				{ 
-`var attrs = templdais.AccordionAttrs{
-	Name: "my-accordion",
-	Items: []templdais.AccordionItem{
-		{Title: "Item 1", Content: preview("1")},
-		{Title: "Item 2", Content: preview("2")},
-		{Title: "Item 3", Content: preview("3")},
-	},
-	Arrow: true
-	}
+`var card = templdais.CardAttrs{
+	Title: "Add images!",
+	Description: "You know that I support images? Add one!",
+	Image: "/static/images/templdais.png",
+	ButtonText: "Go to DaisyUI",
+	Class: "w-[400px]"
+}
+var btn = templdais.ButtonAttrs{
+	Type: "anchor",
+	Link: templ.SafeURL("https://daisyui.com"),
+	Brand: "error",
+	Outline: true
+}
 	
 templ MyComponent() {
 	// ...
-	@templdais.Accordion(attrs)
+	@templdais.Card(card, btn)
 	// ...
 }` }
 			</code>
@@ -97,20 +110,19 @@ templ MyComponent() {
 
 templ AttributesCard() {
 	<article>
-		<h2 class="text-md italic font-semilight">templdais.AccordionAttrs</h2>
-		<table class="hidden table table-zebra"></table>
-		@templdais.Table(tableAccordionAttrs)
+		<h2 class="text-md italic font-semilight">templdais.Card</h2>
+		@templdais.Table(tableCard)
 	</article>
 	<article class="my-3">
-		<h2 class="text-md italic font-semilight">templdais.AccordionItem</h2>
-		@templdais.Table(tableAccordionItemAttrs)
+		<h2 class="text-md italic font-semilight">templdais.CardAttrs</h2>
+		@templdais.Table(tableCardAttrs)
 	</article>
 }
 
 templ CardPage() {
-	<div class="hidden lg:w-4/5"></div>
+	<div class="hidden w-[400px]"></div>
 	<section class="p-4 w-full">
 		<h1 class="text-2xl font-bold my-2">Card</h1>
-		@templdais.Accordion(accordion)
+		@templdais.Accordion(accordionCard)
 	</section>
 }

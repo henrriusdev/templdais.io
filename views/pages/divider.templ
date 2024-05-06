@@ -1,7 +1,96 @@
 package pages
 
+import "github.com/hbourgeot/templdais"
+
+var accordionDiv = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewDiv(), Open: true},
+		{Title: "Code", Content: CodeDiv()},
+		{Title: "Attributes", Content: AttributesDiv()},
+	},
+	Name:  "accordion-page",
+	Arrow: true,
+}
+
+var a = templdais.DividerAttrs{}
+
+var tableDivAttrs = templdais.TableAttrs{
+	TableName: "templdais.DividerAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Brand", "Type": "string", "Description": "The brand of the divider", "Default": "empty"},
+		{"Attribute": "Text", "Type": "string", "Description": "The text of the divider (required)", "Default": "empty"},
+		{"Attribute": "Vertical", "Type": "bool", "Description": "Whether the divider is vertical, if is false, the divider would be horizontal", "Default": "false"},
+		{"Attribute": "Start", "Type": "bool", "Description": "Whether the text is at the start (true) or end (false) of the divider", "Default": "false"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the divider", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewDiv() {
+	<article>
+		<section class="ml-10 lg:ml-0 dark:bg-[#000C20] rounded-lg p-10 flex flex-col justify-center items-center gap-x-3">
+			<h2 class="text-lg font-bold mb-2">Divider vertical</h2>
+			<div class="w-full flex justify-around h-[200px]">
+				@templdais.Divider(templdais.DividerAttrs{Brand: "primary", Text: "Primary at start", Start: true, Class: "w-[15px]"})
+				@templdais.Divider(templdais.DividerAttrs{Brand: "secondary", Text: "Secondary", Class: "w-[15px]"})
+				@templdais.Divider(templdais.DividerAttrs{Brand: "success", Text: "Success", Class: "w-[15px]"})
+				@templdais.Divider(templdais.DividerAttrs{Brand: "error", Text: "Error at end", End: true, Class: "w-[15px]"})
+				@templdais.Divider(templdais.DividerAttrs{Brand: "warning", Text: "Warning", Class: "w-[15px]"})
+			</div>
+			<h2 class="text-lg font-bold my-2">Divider horizontal</h2>
+			<div class="w-full">
+				@templdais.Divider(templdais.DividerAttrs{Brand: "primary", Text: "Primary", Vertical: true})
+				@templdais.Divider(templdais.DividerAttrs{Brand: "secondary", Text: "Secondary at start", Vertical: true, Start: true})
+				@templdais.Divider(templdais.DividerAttrs{Brand: "success", Text: "Success", Vertical: true})
+				@templdais.Divider(templdais.DividerAttrs{Brand: "error", Text: "Error at end", Vertical: true, End: true})
+				@templdais.Divider(templdais.DividerAttrs{Brand: "warning", Text: "Warning", Vertical: true})
+			</div>
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/divider"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeDiv() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `@templdais.Divider(
+	templdais.DividerAttrs{
+		Brand: "primary", Text: "Primary", Vertical: true
+	},
+)` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesDiv() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.DividerAttrs</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableDivAttrs)
+	</article>
+}
+
 templ DividerPage() {
-  <div>
-    <h1>Divider</h1>
-    </div>
+	<section class="p-4 w-full">
+		<div class="hidden divider divider-primary"></div>
+		<div class="hidden divider divider-secondary"></div>
+		<div class="hidden divider divider-accent"></div>
+		<div class="hidden divider divider-success"></div>
+		<div class="hidden divider divider-error"></div>
+		<div class="hidden divider divider-warning"></div>
+		<div class="hidden divider divider-info"></div>
+		<h1 class="text-2xl font-bold my-2">Alert</h1>
+		@templdais.Accordion(accordionDiv)
+	</section>
 }
