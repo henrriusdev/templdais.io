@@ -15,6 +15,7 @@ func main() {
 	})
 
 	app.Use(logger.New())
+	app.Use(ErrorHandler())
 
 	// serve static folder with fiber
 	app.Static("/static", "usr/local/bin/static", fiber.Static{

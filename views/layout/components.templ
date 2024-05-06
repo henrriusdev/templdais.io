@@ -4,26 +4,26 @@ import "github.com/hbourgeot/templdais"
 import "github.com/hbourgeot/templdais.io/helpers"
 
 var menu = templdais.MenuAttrs{
-	Items: helpers.GetComponentPages(),
-	Vertical: true,
-	Size: "lg",
+	Items:      helpers.GetComponentPages(),
+	Vertical:   true,
+	Size:       "lg",
 	Responsive: false,
-	Class: "w-1/5 h-screen-page overflow-y-auto !flex-nowrap !px-0 sticky top-[5px]",
+	Class:      "w-1/5 h-screen-page overflow-y-auto !flex-nowrap !px-0 sticky top-[5px]",
 }
 
-css Section(){
+css Section() {
 	min-height: calc(100vh - 71px);
 }
 
 templ Components(components ...templ.Component) {
-	<section class={"flex justify-start w-full", Section()}>
-	<div class="hidden w-1/3"></div>
+	<section class={ "flex justify-start w-full", Section() }>
+		<div class="hidden w-1/3"></div>
 		@templdais.Menu(menu)
 		@templdais.Divider(templdais.DividerAttrs{Vertical: true, Class: "bg-neutral-400 dark:bg-neutral-800 h-screen mr-4 w-[3px] rounded-xl sticky top-0"})
 		<div class="w-full">
-    for _, c := range components {
-      @c
-    }
+			for _, c := range components {
+				@c
+			}
 		</div>
 	</section>
 }

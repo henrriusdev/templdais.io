@@ -18,7 +18,7 @@ var accordion = templdais.AccordionAttrs{
 		{Title: "Code", Content: Code()},
 		{Title: "Attributes", Content: Attributes()},
 	},
-	Name:  "accordion",
+	Name:  "accordion-page",
 	Arrow: true,
 }
 
@@ -120,20 +120,20 @@ func prev(number string) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><p class=\"text-lg\">Item n")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><p class=\"text-lg\">Item ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(number)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/accordion.templ`, Line: 60, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/accordion.templ`, Line: 60, Col: 34}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" content</p></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" content.</p></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -157,7 +157,7 @@ func Code() templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-lg font-bold\">Inline code</h2><pre data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go overflow-x-auto w-fit\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-lg font-bold\">Inline code (with structs inside the parenthesis)</h2><pre data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go overflow-x-auto w-fit\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -181,7 +181,7 @@ func Code() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</code></pre><h2 class=\"text-lg font-bold\">Fragmented code</h2><pre class=\"w-full\" data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go w-full\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</code></pre><h2 class=\"text-lg font-semibold\">Fragmented code (with structs outside the parenthesis)</h2><pre class=\"w-full\" data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go w-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -203,7 +203,7 @@ templ MyComponent() {
 	// ...
 }`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/accordion.templ`, Line: 108, Col: 2}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/accordion.templ`, Line: 110, Col: 2}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -273,7 +273,7 @@ func AccordionPage() templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"hidden lg:w-4/5\"></div><section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Accordion</h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Accordion</h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

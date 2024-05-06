@@ -1,3 +1,134 @@
 package pages
 
-templ AlertPage(){}
+import "github.com/hbourgeot/templdais"
+
+var accordionAlert = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewAl(), Open: true},
+		{Title: "Code", Content: CodeAl()},
+		{Title: "Attributes", Content: AttributesAl()},
+	},
+	Name:  "accordion-page",
+	Arrow: true,
+}
+
+var tableAlertAttrs = templdais.TableAttrs{
+	TableName: "templdais.AlertAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Brand", "Type": "string", "Description": "The brand of the alert", "Default": "empty"},
+		{"Attribute": "Buttons", "Type": "bool", "Description": "Whether to show buttons in the alert (if true, you can add the buttons manually)", "Default": "false"},
+		{"Attribute": "Description", "Type": "templ.Component", "Description": "The content of the alert", "Default": "empty"},
+		{"Attribute": "Text", "Type": "string", "Description": "The text of the alert (required)", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewAl() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10">
+			@templdais.Alert(templdais.AlertAttrs{Brand: "info", Text: "This is an info alert."})
+			@templdais.Alert(templdais.AlertAttrs{Brand: "success", Text: "This is a success alert.", Buttons: true, Description: "With buttons and description.", Class: "mt-4"}) {
+				@templdais.Button(templdais.ButtonAttrs{
+					Type:    "anchor",
+					Link:    templ.SafeURL("https://daisyui.com/components/alert"),
+					Outline: true,
+					Brand:   "",
+					Class:   "!px-2",
+				}, templ.Attributes{"target": "_blank"}) {
+					View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+				}
+				@templdais.Button(templdais.ButtonAttrs{
+					Type:    "anchor",
+					Link:    templ.SafeURL("https://github.com/hbourgeot/templdais"),
+					Outline: true,
+					Brand:   "warning",
+					Class:   "!px-2 ml-1",
+				}, templ.Attributes{"target": "_blank"}) {
+					Give me a <i class="fas fa-star ml-1"></i>
+				}
+			}
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/alert"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeAl() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ 
+`@templdais.Alert(
+  templdais.AlertAttrs{
+    Brand: "success",
+    Text: "This is a success alert.",
+    Buttons: true, 
+    Description: "With buttons and description."
+    },
+  )` }
+			</code>
+		</pre>
+		<h2 class="text-lg font-semibold">
+			Fragmented code (with structs outside the parenthesis)
+		</h2>
+		<pre
+			class="w-full"
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go w-full">
+				{ 
+`var attrs = templdais.AlertAttrs{
+  Brand: "info",
+  Text: "This is a info alert.",
+  Buttons: true, 
+  Description: "With buttons and description."
+},
+
+var btn = templdais.ButtonAttrs{
+  Type: "anchor",
+  Link: templ.SafeURL("https://daisyui.com/components/alert"),
+  Outline: true,
+  Brand: "accent",
+  Class: "!px-2"
+}
+
+var btnAttrs = templ.Attributes{"target": "_blank"}
+	
+templ MyComponent() {
+  // ...
+  @templdais.Alert(attrs){
+    @templdais.Button(btn, btnAttrs) {
+      View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+    }
+  }
+  // ...
+}` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesAl() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.AlertAttrs</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableAlertAttrs)
+	</article>
+}
+
+templ AlertPage() {
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Alert</h1>
+		@templdais.Accordion(accordionAlert)
+	</section>
+}

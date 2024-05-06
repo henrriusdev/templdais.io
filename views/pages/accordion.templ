@@ -8,7 +8,7 @@ var accordion = templdais.AccordionAttrs{
 		{Title: "Code", Content: Code()},
 		{Title: "Attributes", Content: Attributes()},
 	},
-	Name:  "accordion",
+	Name:  "accordion-page",
 	Arrow: true,
 }
 
@@ -57,13 +57,13 @@ templ Preview() {
 
 templ prev(number string) {
 	<div>
-		<p class="text-lg">Item n{ number } content</p>
+		<p class="text-lg">Item { number } content.</p>
 	</div>
 }
 
 templ Code() {
 	<article>
-		<h2 class="text-lg font-bold">Inline code</h2>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
 		<pre
 			data-prismjs-copy="Copy"
 			data-prismjs-copy-success="Success!"
@@ -83,7 +83,9 @@ templ Code() {
 )` }
 			</code>
 		</pre>
-		<h2 class="text-lg font-bold">Fragmented code</h2>
+		<h2 class="text-lg font-semibold">
+			Fragmented code (with structs outside the parenthesis)
+		</h2>
 		<pre
 			class="w-full"
 			data-prismjs-copy="Copy"
@@ -124,7 +126,6 @@ templ Attributes() {
 }
 
 templ AccordionPage() {
-	<div class="hidden lg:w-4/5"></div>
 	<section class="p-4 w-full">
 		<h1 class="text-2xl font-bold my-2">Accordion</h1>
 		@templdais.Accordion(accordion)
