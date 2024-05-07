@@ -10,7 +10,46 @@ import "context"
 import "io"
 import "bytes"
 
-func MenuPage() templ.Component {
+import "github.com/hbourgeot/templdais"
+
+var accordionMenu = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewMn(), Open: true},
+		{Title: "Code", Content: CodeMn()},
+		{Title: "Attributes", Content: AttributesMn()},
+	},
+	Name:  "accordion-page",
+	Arrow: true,
+}
+
+var tableMenuAttrs = templdais.TableAttrs{
+	TableName: "templdais.MenuAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Responsive", "Type": "bool", "Description": "Enable the responsive menu", "Default": "false"},
+		{"Attribute": "Vertical", "Type": "bool", "Description": "Enable the vertical menu", "Default": "false"},
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the badge", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]MenuItem", "Description": "The items of the menu", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+var mitem = templdais.MenuItem{}
+
+var tableMenuItemAttrs = templdais.TableAttrs{
+	TableName: "MenuItem",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Text", "Type": "string", "Description": "The text of the menu item", "Default": "empty"},
+		{"Attribute": "Link", "Type": "string", "Description": "The link of the menu item", "Default": "empty"},
+		{"Attribute": "Disabled", "Type": "bool", "Description": "Set the item as disabled", "Default": "false"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the item", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+func PreviewMn() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -23,7 +62,198 @@ func MenuPage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"p-4\"><h1 class=\"text-2xl font-bold\">Menu page</h1></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Menu(templdais.MenuAttrs{
+			Items: []templdais.MenuItem{
+				{Text: "Home", Link: "#"},
+				{Text: "About responsive menu", Link: "#"},
+				{Text: "Contact", Link: "#"},
+			},
+			Size:       "large",
+			Responsive: true,
+			Class:      "bg-base-100",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Menu(templdais.MenuAttrs{
+			Items: []templdais.MenuItem{
+				{Text: "Home", Link: "#"},
+				{Text: "About vertical menu", Link: "#"},
+				{Text: "Oh no, a disabled item", Link: "#", Disabled: true},
+			},
+			Size:     "large",
+			Vertical: true,
+			Class:    "bg-base-100 rounded-lg",
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section><section class=\"w-full flex justify-end !p-3\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var2 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+			if !templ_7745c5c3_IsBuffer {
+				templ_7745c5c3_Buffer = templ.GetBuffer()
+				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("View on DaisyUI <i class=\"fas fa-external-link-alt ml-2\"></i>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if !templ_7745c5c3_IsBuffer {
+				_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)
+			}
+			return templ_7745c5c3_Err
+		})
+		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/alert"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section></article>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return templ_7745c5c3_Err
+	})
+}
+
+func CodeMn() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-lg font-bold\">Inline code (with structs inside the parenthesis)</h2><pre data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go overflow-x-auto w-fit\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(`@templdais.Menu(templdais.MenuAttrs{
+	Items: []templdais.MenuItem{
+		{Text: "Home", Link: "#"},
+		{Text: "About responsive menu", Link: "#"},
+		{Text: "Contact", Link: "#"},
+	},
+	Size: "large",
+	Responsive: true,
+	Class: "bg-base-100",
+})`)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/menu.templ`, Line: 93, Col: 3}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</code></pre><h2 class=\"text-lg font-bold\">Fragmented code (with structs outside the parenthesis)</h2><pre data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go overflow-x-auto w-fit\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(`var attrs = templdais.MenuAttrs{
+	Items: []templdais.MenuItem{
+		{Text: "Home", Link: "#"},
+		{Text: "About responsive menu", Link: "#"},
+		{Text: "Contact", Link: "#"},
+	},
+	Size: "large",
+	Responsive: true,
+	Class: "bg-base-100",
+}
+	
+templ MyComponent() {
+	// ...
+	@templdais.Menu(attrs)
+	// ...
+}`)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/menu.templ`, Line: 117, Col: 2}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</code></pre></article>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return templ_7745c5c3_Err
+	})
+}
+
+func AttributesMn() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var6 == nil {
+			templ_7745c5c3_Var6 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-md italic font-semilight\">templdais.MenuAttrs</h2><table class=\"hidden table table-zebra\"></table>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Table(tableMenuAttrs).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</article>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return templ_7745c5c3_Err
+	})
+}
+
+func MenuPage() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var7 == nil {
+			templ_7745c5c3_Var7 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Menu</h1>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Accordion(accordionMenu).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

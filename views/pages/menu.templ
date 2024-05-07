@@ -1,7 +1,136 @@
 package pages
 
+import "github.com/hbourgeot/templdais"
+
+var accordionMenu = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewMn(), Open: true},
+		{Title: "Code", Content: CodeMn()},
+		{Title: "Attributes", Content: AttributesMn()},
+	},
+	Name:  "accordion-page",
+	Arrow: true,
+}
+
+var tableMenuAttrs = templdais.TableAttrs{
+	TableName: "templdais.MenuAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Responsive", "Type": "bool", "Description": "Enable the responsive menu", "Default": "false"},
+		{"Attribute": "Vertical", "Type": "bool", "Description": "Enable the vertical menu", "Default": "false"},
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the badge", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]MenuItem", "Description": "The items of the menu", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+var mitem = templdais.MenuItem{
+	
+}
+
+var tableMenuItemAttrs = templdais.TableAttrs{
+	TableName: "MenuItem",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Text", "Type": "string", "Description": "The text of the menu item", "Default": "empty"},
+		{"Attribute": "Link", "Type": "string", "Description": "The link of the menu item", "Default": "empty"},
+		{"Attribute": "Disabled", "Type": "bool", "Description": "Set the item as disabled", "Default": "false"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the item", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewMn() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4">
+			@templdais.Menu(templdais.MenuAttrs{
+				Items: []templdais.MenuItem{
+					{Text: "Home", Link: "#"},
+					{Text: "About responsive menu", Link: "#"},
+					{Text: "Contact", Link: "#"},
+				},
+				Size: "large",
+				Responsive: true,
+				Class: "bg-base-100",
+			})
+			@templdais.Menu(templdais.MenuAttrs{
+				Items: []templdais.MenuItem{
+					{Text: "Home", Link: "#"},
+					{Text: "About vertical menu", Link: "#"},
+					{Text: "Oh no, a disabled item", Link: "#", Disabled: true},
+				},
+				Size: "large",
+				Vertical: true,
+				Class: "bg-base-100 rounded-lg",
+			})
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/alert"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeMn() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `@templdais.Menu(templdais.MenuAttrs{
+	Items: []templdais.MenuItem{
+		{Text: "Home", Link: "#"},
+		{Text: "About responsive menu", Link: "#"},
+		{Text: "Contact", Link: "#"},
+	},
+	Size: "large",
+	Responsive: true,
+	Class: "bg-base-100",
+})` }
+			</code>
+		</pre>
+		<h2 class="text-lg font-bold">Fragmented code (with structs outside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `var attrs = templdais.MenuAttrs{
+	Items: []templdais.MenuItem{
+		{Text: "Home", Link: "#"},
+		{Text: "About responsive menu", Link: "#"},
+		{Text: "Contact", Link: "#"},
+	},
+	Size: "large",
+	Responsive: true,
+	Class: "bg-base-100",
+}
+	
+templ MyComponent() {
+	// ...
+	@templdais.Menu(attrs)
+	// ...
+}` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesMn() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.MenuAttrs</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableMenuAttrs)
+	</article>
+}
+
 templ MenuPage() {
-	<div class="p-4">
-		<h1 class="text-2xl font-bold">Menu page</h1>
-	</div>
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Menu</h1>
+		@templdais.Accordion(accordionMenu)
+	</section>
 }

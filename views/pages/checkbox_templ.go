@@ -226,7 +226,7 @@ func CheckboxPage() templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"hidden checkbox checkbox-primary\"></div><div class=\"hidden checkbox checkbox-secondary\"></div><div class=\"hidden checkbox checkbox-accent\"></div><div class=\"hidden checkbox checkbox-success\"></div><div class=\"hidden checkbox checkbox-info\"></div><div class=\"hidden checkbox checkbox-warning\"></div><div class=\"hidden checkbox checkbox-error\"></div><section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Alert</h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Alert</h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
