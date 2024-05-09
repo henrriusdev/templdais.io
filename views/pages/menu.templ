@@ -25,9 +25,7 @@ var tableMenuAttrs = templdais.TableAttrs{
 	Class: "bg-secondary",
 }
 
-var mitem = templdais.MenuItem{
-	
-}
+var mitem = templdais.MenuItem{}
 
 var tableMenuItemAttrs = templdais.TableAttrs{
 	TableName: "MenuItem",
@@ -50,9 +48,9 @@ templ PreviewMn() {
 					{Text: "About responsive menu", Link: "#"},
 					{Text: "Contact", Link: "#"},
 				},
-				Size: "large",
+				Size:       "large",
 				Responsive: true,
-				Class: "bg-base-100",
+				Class:      "bg-base-100",
 			})
 			@templdais.Menu(templdais.MenuAttrs{
 				Items: []templdais.MenuItem{
@@ -60,9 +58,9 @@ templ PreviewMn() {
 					{Text: "About vertical menu", Link: "#"},
 					{Text: "Oh no, a disabled item", Link: "#", Disabled: true},
 				},
-				Size: "large",
+				Size:     "large",
 				Vertical: true,
-				Class: "bg-base-100 rounded-lg",
+				Class:    "bg-base-100 rounded-lg",
 			})
 		</section>
 		<section class="w-full flex justify-end !p-3">

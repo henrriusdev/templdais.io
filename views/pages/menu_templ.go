@@ -155,7 +155,7 @@ func CodeMn() templ.Component {
 	Class: "bg-base-100",
 })`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/menu.templ`, Line: 93, Col: 3}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/menu.templ`, Line: 91, Col: 3}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -183,7 +183,7 @@ templ MyComponent() {
 	// ...
 }`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/menu.templ`, Line: 117, Col: 2}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/menu.templ`, Line: 115, Col: 2}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
