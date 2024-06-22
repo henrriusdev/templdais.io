@@ -75,6 +75,8 @@ func components(c fiber.Ctx) error {
 		page = pages.BadgePage()
 	case "breadcrumbs":
 		page = pages.BreadcrumbPage()
+	case "bottomNavigation":
+		page = pages.BottomNavPage()
 	case "button":
 		page = pages.ButtonPage()
 	case "card":
