@@ -27,6 +27,8 @@ var tableChkboxAttrs = templdais.TableAttrs{
 
 templ PreviewCb() {
 	<article>
+	<div class="hidden checkbox checkbox-primary checkbox-secondary checkbox-accent checkbox-success checkbox-info checkbox-warning checkbox-error
+	"></div>
 		<section class="ml-10 lg:ml-0 bg-[#000C20] rounded-lg p-10">
 			<label class="flex items-center gap-x-2">
 				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "primary"})

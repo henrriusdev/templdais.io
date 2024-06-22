@@ -1,26 +1,125 @@
 package pages
 
-templ BottomNav() {
-	<div class="bottom-nav">
-		<a href="/home" class="bottom-nav-item">
-			<i class="material-icons">home</i>
-			<span>Home</span>
-		</a>
-		<a href="/search" class="bottom-nav-item">
-			<i class="material-icons">search</i>
-			<span>Search</span>
-		</a>
-		<a href="/add" class="bottom-nav-item">
-			<i class="material-icons">add</i>
-			<span>Add</span>
-		</a>
-		<a href="/notifications" class="bottom-nav-item">
-			<i class="material-icons">notifications</i>
-			<span>Notifications</span>
-		</a>
-		<a href="/profile" class="bottom-nav-item">
-			<i class="material-icons">person</i>
-			<span>Profile</span>
-		</a>
-	</div>
+import "github.com/hbourgeot/templdais"
+
+var accordionBtmNav = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewBtmNb(), Open: true},
+		{Title: "Code", Content: CodeBtmNb()},
+		{Title: "Attributes", Content: AttributesBtmNb()},
+	},
+	Name:  "accordion-page",
+	Arrow: true,
+}
+
+var tableBtmNavAttrs = templdais.TableAttrs{
+	TableName: "templdais.BottomNavAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Name", "Type": "string", "Description": "The name of the accordion component", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]AccordionItem", "Description": "The list of items in the accordion component",
+			"Default": "nil"},
+		{"Attribute": "Arrow", "Type": "bool", "Description": "Whether to show an arrow icon next to the title", "Default": "false"},
+		{"Attribute": "PlusMinus", "Type": "bool", "Description": "Wheter to show a plus/minus icon next to the title",
+			"Default": "false"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion component", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+var tableBtmNavMenuAttrs = templdais.TableAttrs{
+	TableName: "templdais.AccordionItem",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Title", "Type": "string", "Description": "The title of the accordion item", "Default": "empty"},
+		{"Attribute": "Content", "Type": "templ.Component", "Description": "The content of the accordion item", "Default": "empty"},
+		{"Attribute": "Open", "Type": "bool", "Description": "Whether the accordion item is open by default", "Default": "false"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion item", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewBtmNb() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-secondary flex flex-col justify-center items-center gap-y-3 rounded-lg p-10">
+			@templdais.Navbar(templdais.NavbarAttrs{Brand: "", Items: []templdais.Links{{Text: "Home", Href: templ.SafeURL("#")}, {Text: "About", Href: templ.SafeURL("#")}, {Text: "Contact", Href: templ.SafeURL("#")}}, Centered: true, Title: "Centered nav", Class: "bg-default"})
+			@templdais.Navbar(templdais.NavbarAttrs{Brand: "primary", Items: []templdais.Links{{Text: "Home", Href: templ.SafeURL("#")}, {Text: "About", Href: templ.SafeURL("#")}, {Text: "Contact", Href: templ.SafeURL("#")}}, Responsive: true, Title: "Responsive-nav", Class: "navbar-primary"}){
+				@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Brand: "secondary", Size: "small", Link: templ.SafeURL("#")}, templ.Attributes{}) {
+					Login
+				}
+			}
+			@templdais.Navbar(templdais.NavbarAttrs{Brand: "accent", Title: "Title only", TitleOnly: true, Class: "!bg-accent"})
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/navbar"), Outline: true, Brand: "accent", Class: "!px-2"},
+				templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeBtmNb() {
+	<article>
+		<h2 class="text-lg font-bold hidden bg-accent">Inline code</h2>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<pre data-prismjs-copy="Copy" data-prismjs-copy-success="Success!">
+			<code class="language-go overflow-x-auto w-fit">
+				{ 
+      `@templdais.Accordion(
+      templdais.AccordionAttrs{
+      Name: "my-accordion",
+      Items: []templdais.AccordionItem{
+      {Title: "Accordion Item 1", Content: someComp("1")},
+      {Title: "Accordion Item 2", Content: someComp("2")},
+      {Title: "Accordion Item 3", Content: someComp("3")},
+      },
+      Arrow: true
+      },
+      )` }
+			</code>
+		</pre>
+		<h2 class="text-lg font-semibold">
+			Fragmented code (with structs outside the parenthesis)
+		</h2>
+		<pre class="w-full" data-prismjs-copy="Copy" data-prismjs-copy-success="Success!">
+			<code class="language-go w-full">
+				{ 
+      `var attrs = templdais.AccordionAttrs{
+      Name: "my-accordion",
+      Items: []templdais.AccordionItem{
+      {Title: "Accordion Item 1", Content: someComp("1")},
+      {Title: "Accordion Item 2", Content: someComp("2")},
+      {Title: "Accordion Item 3", Content: someComp("3")},
+      },
+      Arrow: true
+      }
+
+      templ MyComponent() {
+      // ...
+      @templdais.Accordion(attrs)
+      // ...
+      }` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesBtmNb() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.AccordionAttrs</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableAccordionAttrs)
+	</article>
+	<article class="my-3">
+		<h2 class="text-md italic font-semilight">templdais.AccordionItem</h2>
+		@templdais.Table(tableAccordionItemAttrs)
+	</article>
+}
+
+templ BottomNavPage() {
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Bottom Navigation</h1>
+		@templdais.Accordion(accordionNav)
+	</section>
 }

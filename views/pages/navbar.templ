@@ -48,7 +48,7 @@ templ PreviewNb() {
 					Login
 				}
 			}
-			@templdais.Navbar(templdais.NavbarAttrs{Brand: "accent", Title: "Title only", TitleOnly: true, Class: "bg-accent"})
+			@templdais.Navbar(templdais.NavbarAttrs{Brand: "accent", Title: "Title only", TitleOnly: true, Class: "!bg-accent"})
 		</section>
 		<section class="w-full flex justify-end !p-3">
 			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/navbar"), Outline: true, Brand: "accent", Class: "!px-2"},
@@ -61,6 +61,7 @@ templ PreviewNb() {
 
 templ CodeNb() {
 	<article>
+		<h2 class="text-lg font-bold hidden bg-accent">Inline code</h2>
 		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
 		<pre data-prismjs-copy="Copy" data-prismjs-copy-success="Success!">
 			<code class="language-go overflow-x-auto w-fit">
@@ -118,7 +119,7 @@ templ AttributesNb() {
 
 templ NavbarPage() {
 	<section class="p-4 w-full">
-		<h1 class="text-2xl font-bold my-2">Accordion</h1>
+		<h1 class="text-2xl font-bold my-2">Navigation bar</h1>
 		@templdais.Accordion(accordionNav)
 	</section>
 }
