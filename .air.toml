@@ -3,7 +3,7 @@ tmp_dir = "bin"
 
 [build]
   bin = "./bin/main"
-  cmd = "templ generate && go build -buildvcs=false -o ./bin/main.exe ./cmd"
+  cmd = "templ generate && go build -buildvcs=false -o ./bin/main ./cmd"
   delay = 1000
   exclude_dir = ["static", "node_modules"]
   exclude_regex = [".*_templ.go"]
