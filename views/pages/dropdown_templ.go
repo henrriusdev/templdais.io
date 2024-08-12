@@ -10,33 +10,31 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "github.com/hbourgeot/templdais"
 
-var accordionMenu = templdais.AccordionAttrs{
+var accordionDropdown = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{
-		{Title: "Preview", Content: PreviewMn(), Open: true},
-		{Title: "Code", Content: CodeMn()},
-		{Title: "Attributes", Content: AttributesMn()},
+		{Title: "Preview", Content: PreviewDd(), Open: true},
+		{Title: "Code", Content: CodeDd()},
+		{Title: "Attributes", Content: AttributesDd()},
 	},
 	Name:  "accordion-page",
 	Arrow: true,
 }
 
-var tableMenuAttrs = templdais.TableAttrs{
-	TableName: "templdais.MenuAttrs",
+var tableDropdownAttrs = templdais.TableAttrs{
+	TableName: "templdais.DropdownAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
 		{"Attribute": "Responsive", "Type": "bool", "Description": "Enable the responsive menu", "Default": "false"},
 		{"Attribute": "Vertical", "Type": "bool", "Description": "Enable the vertical menu", "Default": "false"},
 		{"Attribute": "Size", "Type": "string", "Description": "The size of the badge", "Default": "empty"},
 		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
-		{"Attribute": "Items", "Type": "[]MenuItem", "Description": "The items of the menu", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]DropdownItem", "Description": "The items of the menu", "Default": "empty"},
 	},
 	Class: "bg-secondary",
 }
 
-var mitem = templdais.MenuItem{}
-
-var tableMenuItemAttrs = templdais.TableAttrs{
-	TableName: "MenuItem",
+var tableDropdownItemAttrs = templdais.TableAttrs{
+	TableName: "DropdownItem",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
 		{"Attribute": "Text", "Type": "string", "Description": "The text of the menu item", "Default": "empty"},
@@ -47,7 +45,7 @@ var tableMenuItemAttrs = templdais.TableAttrs{
 	Class: "bg-secondary",
 }
 
-func PreviewMn() templ.Component {
+func PreviewDd() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -65,37 +63,7 @@ func PreviewMn() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templdais.Menu(templdais.MenuAttrs{
-			Items: []templdais.MenuItem{
-				{Text: "Home", Link: "#"},
-				{Text: "About responsive menu", Link: "#"},
-				{Text: "Contact", Link: "#"},
-			},
-			Size:       "large",
-			Responsive: true,
-			Class:      "bg-base-100",
-		}).Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templdais.Menu(templdais.MenuAttrs{
-			Items: []templdais.MenuItem{
-				{Text: "Home", Link: "#"},
-				{Text: "About vertical menu", Link: "#"},
-				{Text: "Oh no, a disabled item", Link: "#", Disabled: true},
-			},
-			Size:     "large",
-			Vertical: true,
-			Class:    "bg-base-100 rounded-lg",
-		}).Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section><section class=\"w-full flex justify-end !p-3\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4\"></section><section class=\"w-full flex justify-end !p-3\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -129,7 +97,7 @@ func PreviewMn() templ.Component {
 	})
 }
 
-func CodeMn() templ.Component {
+func CodeDd() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -152,8 +120,8 @@ func CodeMn() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(`@templdais.Menu(templdais.MenuAttrs{
-	Items: []templdais.MenuItem{
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(`@templdais.Dropdown(templdais.DropdownAttrs{
+	Items: []templdais.DropdownItem{
 		{Text: "Home", Link: "#"},
 		{Text: "About responsive menu", Link: "#"},
 		{Text: "Contact", Link: "#"},
@@ -163,7 +131,7 @@ func CodeMn() templ.Component {
 	Class: "bg-base-100",
 })`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/menu.templ`, Line: 91, Col: 3}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/dropdown.templ`, Line: 70, Col: 3}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -174,8 +142,8 @@ func CodeMn() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(`var attrs = templdais.MenuAttrs{
-	Items: []templdais.MenuItem{
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(`var attrs = templdais.DropdownAttrs{
+	Items: []templdais.DropdownItem{
 		{Text: "Home", Link: "#"},
 		{Text: "About responsive menu", Link: "#"},
 		{Text: "Contact", Link: "#"},
@@ -187,11 +155,11 @@ func CodeMn() templ.Component {
 	
 templ MyComponent() {
 	// ...
-	@templdais.Menu(attrs)
+	@templdais.Dropdown(attrs)
 	// ...
 }`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/menu.templ`, Line: 115, Col: 2}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/dropdown.templ`, Line: 94, Col: 2}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -205,7 +173,7 @@ templ MyComponent() {
 	})
 }
 
-func AttributesMn() templ.Component {
+func AttributesDd() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -223,11 +191,11 @@ func AttributesMn() templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-md italic font-semilight\">templdais.MenuAttrs</h2><table class=\"hidden table table-zebra\"></table>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-md italic font-semilight\">templdais.DropdownAttrs</h2><table class=\"hidden table table-zebra\"></table>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Table(tableMenuAttrs).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Table(tableDropdownAttrs).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -239,7 +207,7 @@ func AttributesMn() templ.Component {
 	})
 }
 
-func MenuPage() templ.Component {
+func DropdownPage() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -257,11 +225,11 @@ func MenuPage() templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Menu</h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Dropdown</h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Accordion(accordionMenu).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Accordion(accordionDropdown).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
