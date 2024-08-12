@@ -1,6 +1,6 @@
 package pages
 
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 
 var accordionDropdown = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{
@@ -8,7 +8,7 @@ var accordionDropdown = templdais.AccordionAttrs{
 		{Title: "Code", Content: CodeDd()},
 		{Title: "Attributes", Content: AttributesDd()},
 	},
-	Name:  "accordion-page",
+	Name:  "dropdown-page",
 	Arrow: true,
 }
 
@@ -16,23 +16,13 @@ var tableDropdownAttrs = templdais.TableAttrs{
 	TableName: "templdais.DropdownAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
-		{"Attribute": "Responsive", "Type": "bool", "Description": "Enable the responsive menu", "Default": "false"},
-		{"Attribute": "Vertical", "Type": "bool", "Description": "Enable the vertical menu", "Default": "false"},
-		{"Attribute": "Size", "Type": "string", "Description": "The size of the badge", "Default": "empty"},
+		{"Attribute": "Position", "Type": "string", "Description": "The position of the menu", "Default": "bottom"},
+		{"Attribute": "End", "Type": "bool", "Description": "Align the menu to the end", "Default": "false"},
+		{"Attribute": "Hover", "Type": "bool", "Description": "Enable the hover effect", "Default": "false"},
 		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
-		{"Attribute": "Items", "Type": "[]DropdownItem", "Description": "The items of the menu", "Default": "empty"},
-	},
-	Class: "bg-secondary",
-}
-
-var tableDropdownItemAttrs = templdais.TableAttrs{
-	TableName: "DropdownItem",
-	Columns:   []string{"Attribute", "Type", "Description", "Default"},
-	Rows: []map[string]string{
-		{"Attribute": "Text", "Type": "string", "Description": "The text of the menu item", "Default": "empty"},
-		{"Attribute": "Link", "Type": "string", "Description": "The link of the menu item", "Default": "empty"},
-		{"Attribute": "Disabled", "Type": "bool", "Description": "Set the item as disabled", "Default": "false"},
-		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the item", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]Links", "Description": "The items to show", "Default": "empty"},
+		{"Attribute": "BtnBrand", "Type": "string", "Description": "The brand of the button", "Default": "primary"},
+		{"Attribute": "BtnSize", "Type": "string", "Description": "The size of the button", "Default": "md"},
 	},
 	Class: "bg-secondary",
 }
@@ -40,10 +30,21 @@ var tableDropdownItemAttrs = templdais.TableAttrs{
 templ PreviewDd() {
 	<article>
 		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4">
-			
+			@templdais.DropdownMenu(templdais.DropdownAttrs{
+				Items: []templdais.Links{
+					{Text: "Home", Href: templ.SafeURL("#")},
+					{Text: "About responsive menu", Href: templ.SafeURL("#")},
+					{Text: "Contact", Href: templ.SafeURL("#")},
+				},
+				Class:    "!bg-accent text-black",
+				BtnBrand: "accent",
+				BtnSize:  "md",
+			}) {
+				Click me
+			}
 		</section>
 		<section class="w-full flex justify-end !p-3">
-			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/alert"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/dropdown"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
 				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
 			}
 		</section>
@@ -58,16 +59,18 @@ templ CodeDd() {
 			data-prismjs-copy-success="Success!"
 		>
 			<code class="language-go overflow-x-auto w-fit">
-				{ `@templdais.Dropdown(templdais.DropdownAttrs{
-	Items: []templdais.DropdownItem{
-		{Text: "Home", Link: "#"},
-		{Text: "About responsive menu", Link: "#"},
-		{Text: "Contact", Link: "#"},
+				{ `@templdais.DropdownMenu(templdais.DropdownAttrs{
+	Items: []templdais.Links{
+		{Text: "Home", Href: templ.SafeURL("#")},
+		{Text: "About responsive menu", Href: templ.SafeURL("#")},
+		{Text: "Contact", Href: templ.SafeURL("#")},
 	},
-	Size: "large",
-	Responsive: true,
-	Class: "bg-base-100",
-})` }
+	Class: "bg-primary",
+	BtnBrand: "accent",
+	BtnSize: "sm",
+}) {
+	Here comes the content or text
+}` }
 			</code>
 		</pre>
 		<h2 class="text-lg font-bold">Fragmented code (with structs outside the parenthesis)</h2>
@@ -76,20 +79,22 @@ templ CodeDd() {
 			data-prismjs-copy-success="Success!"
 		>
 			<code class="language-go overflow-x-auto w-fit">
-				{ `var attrs = templdais.DropdownAttrs{
-	Items: []templdais.DropdownItem{
-		{Text: "Home", Link: "#"},
-		{Text: "About responsive menu", Link: "#"},
-		{Text: "Contact", Link: "#"},
+				{ `var attrs = ttempldais.DropdownAttrs{
+	Items: []templdais.Links{
+		{Text: "Home", Href: templ.SafeURL("#")},
+		{Text: "About responsive menu", Href: templ.SafeURL("#")},
+		{Text: "Contact", Href: templ.SafeURL("#")},
 	},
-	Size: "large",
-	Responsive: true,
-	Class: "bg-base-100",
+	Class: "bg-primary",
+	BtnBrand: "accent",
+	BtnSize: "sm",
 }
 	
 templ MyComponent() {
 	// ...
-	@templdais.Dropdown(attrs)
+	@templdais.DropdownMenu(attrs) {
+		Here comes the content or text
+	}
 	// ...
 }` }
 			</code>
@@ -102,12 +107,15 @@ templ AttributesDd() {
 		<h2 class="text-md italic font-semilight">templdais.DropdownAttrs</h2>
 		<table class="hidden table table-zebra"></table>
 		@templdais.Table(tableDropdownAttrs)
+		<h2 class="text-md italic font-semilight mt-4">templdais.Links</h2>
+		@templdais.Table(tableLinks)
 	</article>
 }
 
 templ DropdownPage() {
 	<section class="p-4 w-full">
-		<h1 class="text-2xl font-bold my-2">Dropdown</h1>
+		<h1 class="text-2xl font-bold my-2">Dropdown Menu</h1>
 		@templdais.Accordion(accordionDropdown)
 	</section>
+	<div class="bg-accent hidden"></div>
 }

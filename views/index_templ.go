@@ -8,7 +8,7 @@ package views
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 
 func Background() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()

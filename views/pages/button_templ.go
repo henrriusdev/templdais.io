@@ -8,7 +8,7 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 
 var accordionBtn = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{

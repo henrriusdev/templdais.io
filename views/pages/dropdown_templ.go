@@ -8,7 +8,7 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 
 var accordionDropdown = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{
@@ -16,7 +16,7 @@ var accordionDropdown = templdais.AccordionAttrs{
 		{Title: "Code", Content: CodeDd()},
 		{Title: "Attributes", Content: AttributesDd()},
 	},
-	Name:  "accordion-page",
+	Name:  "dropdown-page",
 	Arrow: true,
 }
 
@@ -24,23 +24,13 @@ var tableDropdownAttrs = templdais.TableAttrs{
 	TableName: "templdais.DropdownAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
-		{"Attribute": "Responsive", "Type": "bool", "Description": "Enable the responsive menu", "Default": "false"},
-		{"Attribute": "Vertical", "Type": "bool", "Description": "Enable the vertical menu", "Default": "false"},
-		{"Attribute": "Size", "Type": "string", "Description": "The size of the badge", "Default": "empty"},
+		{"Attribute": "Position", "Type": "string", "Description": "The position of the menu", "Default": "bottom"},
+		{"Attribute": "End", "Type": "bool", "Description": "Align the menu to the end", "Default": "false"},
+		{"Attribute": "Hover", "Type": "bool", "Description": "Enable the hover effect", "Default": "false"},
 		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
-		{"Attribute": "Items", "Type": "[]DropdownItem", "Description": "The items of the menu", "Default": "empty"},
-	},
-	Class: "bg-secondary",
-}
-
-var tableDropdownItemAttrs = templdais.TableAttrs{
-	TableName: "DropdownItem",
-	Columns:   []string{"Attribute", "Type", "Description", "Default"},
-	Rows: []map[string]string{
-		{"Attribute": "Text", "Type": "string", "Description": "The text of the menu item", "Default": "empty"},
-		{"Attribute": "Link", "Type": "string", "Description": "The link of the menu item", "Default": "empty"},
-		{"Attribute": "Disabled", "Type": "bool", "Description": "Set the item as disabled", "Default": "false"},
-		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the item", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]Links", "Description": "The items to show", "Default": "empty"},
+		{"Attribute": "BtnBrand", "Type": "string", "Description": "The brand of the button", "Default": "primary"},
+		{"Attribute": "BtnSize", "Type": "string", "Description": "The size of the button", "Default": "md"},
 	},
 	Class: "bg-secondary",
 }
@@ -63,11 +53,46 @@ func PreviewDd() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4\"></section><section class=\"w-full flex justify-end !p-3\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Var2 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+			if !templ_7745c5c3_IsBuffer {
+				defer func() {
+					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+					if templ_7745c5c3_Err == nil {
+						templ_7745c5c3_Err = templ_7745c5c3_BufErr
+					}
+				}()
+			}
+			ctx = templ.InitializeContext(ctx)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("Click me")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			return templ_7745c5c3_Err
+		})
+		templ_7745c5c3_Err = templdais.DropdownMenu(templdais.DropdownAttrs{
+			Items: []templdais.Links{
+				{Text: "Home", Href: templ.SafeURL("#")},
+				{Text: "About responsive menu", Href: templ.SafeURL("#")},
+				{Text: "Contact", Href: templ.SafeURL("#")},
+			},
+			Class:    "!bg-accent text-black",
+			BtnBrand: "accent",
+			BtnSize:  "md",
+		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section><section class=\"w-full flex justify-end !p-3\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Var3 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
 			if !templ_7745c5c3_IsBuffer {
@@ -85,7 +110,7 @@ func PreviewDd() templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/alert"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/dropdown"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -110,30 +135,32 @@ func CodeDd() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var3 == nil {
-			templ_7745c5c3_Var3 = templ.NopComponent
+		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var4 == nil {
+			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-lg font-bold\">Inline code (with structs inside the parenthesis)</h2><pre data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go overflow-x-auto w-fit\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(`@templdais.Dropdown(templdais.DropdownAttrs{
-	Items: []templdais.DropdownItem{
-		{Text: "Home", Link: "#"},
-		{Text: "About responsive menu", Link: "#"},
-		{Text: "Contact", Link: "#"},
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(`@templdais.DropdownMenu(templdais.DropdownAttrs{
+	Items: []templdais.Links{
+		{Text: "Home", Href: templ.SafeURL("#")},
+		{Text: "About responsive menu", Href: templ.SafeURL("#")},
+		{Text: "Contact", Href: templ.SafeURL("#")},
 	},
-	Size: "large",
-	Responsive: true,
-	Class: "bg-base-100",
-})`)
+	Class: "bg-primary",
+	BtnBrand: "accent",
+	BtnSize: "sm",
+}) {
+	Here comes the content or text
+}`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/dropdown.templ`, Line: 70, Col: 3}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/dropdown.templ`, Line: 73, Col: 2}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -141,27 +168,29 @@ func CodeDd() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(`var attrs = templdais.DropdownAttrs{
-	Items: []templdais.DropdownItem{
-		{Text: "Home", Link: "#"},
-		{Text: "About responsive menu", Link: "#"},
-		{Text: "Contact", Link: "#"},
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(`var attrs = ttempldais.DropdownAttrs{
+	Items: []templdais.Links{
+		{Text: "Home", Href: templ.SafeURL("#")},
+		{Text: "About responsive menu", Href: templ.SafeURL("#")},
+		{Text: "Contact", Href: templ.SafeURL("#")},
 	},
-	Size: "large",
-	Responsive: true,
-	Class: "bg-base-100",
+	Class: "bg-primary",
+	BtnBrand: "accent",
+	BtnSize: "sm",
 }
 	
 templ MyComponent() {
 	// ...
-	@templdais.Dropdown(attrs)
+	@templdais.DropdownMenu(attrs) {
+		Here comes the content or text
+	}
 	// ...
 }`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/dropdown.templ`, Line: 94, Col: 2}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/dropdown.templ`, Line: 99, Col: 2}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -186,9 +215,9 @@ func AttributesDd() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var6 == nil {
-			templ_7745c5c3_Var6 = templ.NopComponent
+		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var7 == nil {
+			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-md italic font-semilight\">templdais.DropdownAttrs</h2><table class=\"hidden table table-zebra\"></table>")
@@ -196,6 +225,14 @@ func AttributesDd() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = templdais.Table(tableDropdownAttrs).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h2 class=\"text-md italic font-semilight mt-4\">templdais.Links</h2>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templdais.Table(tableLinks).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -220,12 +257,12 @@ func DropdownPage() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var7 == nil {
-			templ_7745c5c3_Var7 = templ.NopComponent
+		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var8 == nil {
+			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Dropdown</h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Dropdown Menu</h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -233,7 +270,7 @@ func DropdownPage() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</section><div class=\"bg-accent hidden\"></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

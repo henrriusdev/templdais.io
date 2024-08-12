@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/a-h/templ"
-	"github.com/hbourgeot/templdais"
+	"github.com/henrriusdev/templdais"
 )
 
 func GetComponentPages() []templdais.MenuItem {

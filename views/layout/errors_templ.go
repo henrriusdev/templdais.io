@@ -11,7 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import "github.com/henrriusdev/templdais.io/views/partials"
 import "strconv"
 import "strings"
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 
 func goBack() templ.ComponentScript {
 	return templ.ComponentScript{

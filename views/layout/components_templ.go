@@ -8,7 +8,7 @@ package layout
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 import "github.com/henrriusdev/templdais.io/helpers"
 
 var menu = templdais.MenuAttrs{

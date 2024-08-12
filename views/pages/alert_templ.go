@@ -8,7 +8,7 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 
 var accordionAlert = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{
@@ -123,7 +123,7 @@ func PreviewAl() templ.Component {
 			})
 			templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{
 				Type:    "anchor",
-				Link:    templ.SafeURL("https://github.com/hbourgeot/templdais"),
+				Link:    templ.SafeURL("https://github.com/henrriusdev/templdais"),
 				Outline: true,
 				Brand:   "warning",
 				Class:   "!px-2 ml-1",

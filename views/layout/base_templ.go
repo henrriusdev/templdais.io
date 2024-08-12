@@ -8,7 +8,7 @@ package layout
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 
 var nav = templdais.NavbarAttrs{
 	Brand: "primary",
@@ -16,7 +16,7 @@ var nav = templdais.NavbarAttrs{
 	Items: []templdais.Links{
 		{Text: "Docs", Href: "/docs"},
 		{Text: "Components", Href: "/components"},
-		{Text: "GitHub", Href: "https://github.com/hbourgeot/templdais"},
+		{Text: "GitHub", Href: "https://github.com/henrriusdev/templdais"},
 	},
 	Centered: true,
 	Class:    "bg-primary",
