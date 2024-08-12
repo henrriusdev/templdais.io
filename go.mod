@@ -1,11 +1,11 @@
-module github.com/hbourgeot/templdais.io
+module github.com/henrriusdev/templdais.io
 
 go 1.22.0
 
 require (
-	github.com/a-h/templ v0.2.707
+	github.com/a-h/templ v0.2.747
 	github.com/gofiber/fiber/v3 v3.0.0-beta.2
-	github.com/hbourgeot/templdais v1.4.3
+	github.com/hbourgeot/templdais v1.4.4
 )
 
 require (
@@ -18,5 +18,5 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.52.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/sys v0.21.0 // indirect
 )
