@@ -8,7 +8,10 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/henrriusdev/templdais"
+import (
+	"github.com/henrriusdev/templdais"
+	"github.com/henrriusdev/templdais.io/views/partials"
+)
 
 var accordionBtmNav = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{
@@ -16,7 +19,7 @@ var accordionBtmNav = templdais.AccordionAttrs{
 		{Title: "Code", Content: CodeBtmNb()},
 		{Title: "Attributes", Content: AttributesBtmNb()},
 	},
-	Name:  "accordion-page",
+	Name:  "btm-nav-page",
 	Arrow: true,
 }
 
@@ -39,9 +42,15 @@ var tableBtmNavItemAttrs = templdais.TableAttrs{
 	Rows: []map[string]string{
 		{"Attribute": "Body", "Type": "templ.Component", "Description": "The body of the bottom navigation item", "Default": "empty"},
 		{"Attribute": "Button", "Type": "Button", "Description": "The button of the bottom navigation item", "Default": "empty"},
-		{"Attribute": "Attributes", "Type": "templ.Attributes", "Description": "The attributes of the bottom navigation item", "Default": "empty"},
+		{"Attribute": "Attributes", "Type": "templ.Attributes", "Description": "The attributes of the bottom navigation item", "Default": "nil"},
 	},
 	Class: "bg-secondary",
+}
+
+var previewBtmNavItems = []templdais.BtmNavItem{
+	{Body: partials.HomeIcon(), Button: templdais.ButtonAttrs{Type: "button", Link: templ.SafeURL("#"), Size: "sm"}, Attrs: templ.Attributes{}},
+	{Body: partials.InfoIcon(), Button: templdais.ButtonAttrs{Type: "button", Link: templ.SafeURL("#"), Size: "sm"}, Attrs: templ.Attributes{}},
+	{Body: partials.ChartIcon(), Button: templdais.ButtonAttrs{Type: "button", Link: templ.SafeURL("#"), Size: "sm", Class: "active"}, Attrs: templ.Attributes{}},
 }
 
 func PreviewBtmNb() templ.Component {
@@ -62,55 +71,15 @@ func PreviewBtmNb() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary flex flex-col justify-center items-center gap-y-3 rounded-lg p-10\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><section class=\"ml-10 lg:ml-0 bg-secondary flex flex-col justify-center items-center gap-y-3 rounded-lg p-10 h-[300px] relative\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Navbar(templdais.NavbarAttrs{Brand: "", Items: []templdais.Links{{Text: "Home", Href: templ.SafeURL("#")}, {Text: "About", Href: templ.SafeURL("#")}, {Text: "Contact", Href: templ.SafeURL("#")}}, Centered: true, Title: "Centered nav", Class: "bg-default"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.BottomNav(templdais.BottomNavAttrs{Brand: "primary", Items: previewBtmNavItems, Size: "sm", Class: "max-w-[70vw] absolute top-[75px] left-[5%] !m-0"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var2 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
-			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
-			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
-			if !templ_7745c5c3_IsBuffer {
-				defer func() {
-					templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
-					if templ_7745c5c3_Err == nil {
-						templ_7745c5c3_Err = templ_7745c5c3_BufErr
-					}
-				}()
-			}
-			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Var3 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
-				templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
-				templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
-				if !templ_7745c5c3_IsBuffer {
-					defer func() {
-						templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
-						if templ_7745c5c3_Err == nil {
-							templ_7745c5c3_Err = templ_7745c5c3_BufErr
-						}
-					}()
-				}
-				ctx = templ.InitializeContext(ctx)
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("Login")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				return templ_7745c5c3_Err
-			})
-			templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Brand: "secondary", Size: "small", Link: templ.SafeURL("#")}, templ.Attributes{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			return templ_7745c5c3_Err
-		})
-		templ_7745c5c3_Err = templdais.Navbar(templdais.NavbarAttrs{Brand: "primary", Items: []templdais.Links{{Text: "Home", Href: templ.SafeURL("#")}, {Text: "About", Href: templ.SafeURL("#")}, {Text: "Contact", Href: templ.SafeURL("#")}}, Responsive: true, Title: "Responsive-nav", Class: "navbar-primary"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templdais.Navbar(templdais.NavbarAttrs{Brand: "accent", Title: "Title only", TitleOnly: true, Class: "!bg-accent"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.BottomNav(templdais.BottomNavAttrs{Brand: "success", Items: previewBtmNavItems, Size: "sm", Class: "max-w-[70vw] absolute top-[175px] left-[5%] !m-0"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -118,7 +87,7 @@ func PreviewBtmNb() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Var4 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Var2 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
 			if !templ_7745c5c3_IsBuffer {
@@ -136,8 +105,8 @@ func PreviewBtmNb() templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/navbar"), Outline: true, Brand: "accent", Class: "!px-2"},
-			templ.Attributes{"target": "_blank"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/bottom-navigation"), Outline: true, Brand: "accent", Class: "!px-2"},
+			templ.Attributes{"target": "_blank"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -162,64 +131,60 @@ func CodeBtmNb() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var5 == nil {
-			templ_7745c5c3_Var5 = templ.NopComponent
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-lg font-bold hidden bg-accent\">Inline code</h2><h2 class=\"text-lg font-bold\">Inline code (with structs inside the parenthesis)</h2><pre data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go overflow-x-auto w-fit\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-lg font-bold hidden bg-accent\">Inline code</h2><h2 class=\"text-lg font-bold\">Inline code (with structs inside the parenthesis)</h2><div class=\"overflow-x-auto w-full max-w-[75vw]\"><pre data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go overflow-x-auto\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var6 string
-		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(
-			`@templdais.Accordion(
-      templdais.AccordionAttrs{
-      Name: "my-accordion",
-      Items: []templdais.AccordionItem{
-      {Title: "Accordion Item 1", Content: someComp("1")},
-      {Title: "Accordion Item 2", Content: someComp("2")},
-      {Title: "Accordion Item 3", Content: someComp("3")},
-      },
-      Arrow: true
-      },
-      )`)
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(
+			`@templdais.BottomNav(templdais.BottomNavAttrs{Brand: "primary", Items: []templdais.BtmNavItem{
+	{Body: partials.HomeIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+	{Body: partials.InfoIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+	{Body: partials.ChartIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+}, Size: "lg"})`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/bottomNavigation.templ`, Line: 76, Col: 8}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/bottomNavigation.templ`, Line: 77, Col: 16}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</code></pre><h2 class=\"text-lg font-semibold\">Fragmented code (with structs outside the parenthesis)</h2><pre class=\"w-full\" data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go w-full\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</code></pre></div><h2 class=\"text-lg font-semibold\">Fragmented code (with structs outside the parenthesis)</h2><div class=\"overflow-x-auto w-full max-w-[75vw]\"><pre class=\"w-full\" data-prismjs-copy=\"Copy\" data-prismjs-copy-success=\"Success!\"><code class=\"language-go w-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var7 string
-		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(
-			`var attrs = templdais.AccordionAttrs{
-      Name: "my-accordion",
-      Items: []templdais.AccordionItem{
-      {Title: "Accordion Item 1", Content: someComp("1")},
-      {Title: "Accordion Item 2", Content: someComp("2")},
-      {Title: "Accordion Item 3", Content: someComp("3")},
-      },
-      Arrow: true
-      }
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(
+			`var items = []templdais.BtmNavItem{
+	{Body: partials.HomeIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+	{Body: partials.InfoIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+	{Body: partials.ChartIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+}
 
-      templ MyComponent() {
-      // ...
-      @templdais.Accordion(attrs)
-      // ...
-      }`)
+var attrs = templdais.BottomNavAttrs{
+	Brand: "default",
+	Items: items,
+	Size: "lg"
+}
+
+templ MyComponent() {
+	// ...
+	@templdais.BottemNav(attrs)
+	// ...
+}`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/bottomNavigation.templ`, Line: 99, Col: 8}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/bottomNavigation.templ`, Line: 104, Col: 2}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</code></pre></article>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</code></pre></div></article>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -240,24 +205,24 @@ func AttributesBtmNb() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var8 == nil {
-			templ_7745c5c3_Var8 = templ.NopComponent
+		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var6 == nil {
+			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-md italic font-semilight\">templdais.AccordionAttrs</h2><table class=\"hidden table table-zebra\"></table>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<article><h2 class=\"text-md italic font-semilight\">templdais.BottomNavAttrs</h2><table class=\"hidden table table-zebra\"></table>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Table(tableAccordionAttrs).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Table(tableBtmNavAttrs).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</article><article class=\"my-3\"><h2 class=\"text-md italic font-semilight\">templdais.AccordionItem</h2>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</article><article class=\"my-3\"><h2 class=\"text-md italic font-semilight\">templdais.BtmNavItem</h2>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Table(tableAccordionItemAttrs).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Table(tableBtmNavItemAttrs).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -282,16 +247,16 @@ func BottomNavPage() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var9 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var9 == nil {
-			templ_7745c5c3_Var9 = templ.NopComponent
+		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var7 == nil {
+			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"p-4 w-full\"><h1 class=\"text-2xl font-bold my-2\">Bottom Navigation</h1>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"hidden collapse\"></section><section class=\"p-4 max-w-full\"><h1 class=\"text-2xl font-bold my-2\">Bottom Navigation</h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Accordion(accordionNav).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Accordion(accordionBtmNav).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

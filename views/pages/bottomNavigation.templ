@@ -1,6 +1,9 @@
 package pages
 
-import "github.com/henrriusdev/templdais"
+import (
+	"github.com/henrriusdev/templdais"
+	"github.com/henrriusdev/templdais.io/views/partials"
+)
 
 var accordionBtmNav = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{
@@ -8,7 +11,7 @@ var accordionBtmNav = templdais.AccordionAttrs{
 		{Title: "Code", Content: CodeBtmNb()},
 		{Title: "Attributes", Content: AttributesBtmNb()},
 	},
-	Name:  "accordion-page",
+	Name:  "btm-nav-page",
 	Arrow: true,
 }
 
@@ -31,27 +34,30 @@ var tableBtmNavItemAttrs = templdais.TableAttrs{
 	Rows: []map[string]string{
 		{"Attribute": "Body", "Type": "templ.Component", "Description": "The body of the bottom navigation item", "Default": "empty"},
 		{"Attribute": "Button", "Type": "Button", "Description": "The button of the bottom navigation item", "Default": "empty"},
-		{"Attribute": "Attributes", "Type": "templ.Attributes", "Description": "The attributes of the bottom navigation item", "Default": "empty"},
+		{"Attribute": "Attributes", "Type": "templ.Attributes", "Description": "The attributes of the bottom navigation item", "Default": "nil"},
 	},
 	Class: "bg-secondary",
 }
 
+var previewBtmNavItems = []templdais.BtmNavItem{
+	{Body: partials.HomeIcon(), Button: templdais.ButtonAttrs{Type: "button", Link: templ.SafeURL("#"), Size: "sm"}, Attrs: templ.Attributes{}},
+	{Body: partials.InfoIcon(), Button: templdais.ButtonAttrs{Type: "button", Link: templ.SafeURL("#"), Size: "sm"}, Attrs: templ.Attributes{}},
+	{Body: partials.ChartIcon(), Button: templdais.ButtonAttrs{Type: "button", Link: templ.SafeURL("#"), Size: "sm", Class: "active"}, Attrs: templ.Attributes{}},
+}
+
 templ PreviewBtmNb() {
 	<article>
-		<section class="ml-10 lg:ml-0 bg-secondary flex flex-col justify-center items-center gap-y-3 rounded-lg p-10">
-			@templdais.Navbar(templdais.NavbarAttrs{Brand: "", Items: []templdais.Links{{Text: "Home", Href: templ.SafeURL("#")}, {Text: "About", Href: templ.SafeURL("#")}, {Text: "Contact", Href: templ.SafeURL("#")}}, Centered: true, Title: "Centered nav", Class: "bg-default"})
-			@templdais.Navbar(templdais.NavbarAttrs{Brand: "primary", Items: []templdais.Links{{Text: "Home", Href: templ.SafeURL("#")}, {Text: "About", Href: templ.SafeURL("#")}, {Text: "Contact", Href: templ.SafeURL("#")}}, Responsive: true, Title: "Responsive-nav", Class: "navbar-primary"}){
-				@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Brand: "secondary", Size: "small", Link: templ.SafeURL("#")}, templ.Attributes{}) {
-					Login
-				}
-			}
-			@templdais.Navbar(templdais.NavbarAttrs{Brand: "accent", Title: "Title only", TitleOnly: true, Class: "!bg-accent"})
+		<section class="ml-10 lg:ml-0 bg-secondary flex flex-col justify-center items-center gap-y-3 rounded-lg p-10 h-[300px] relative">
+			@templdais.BottomNav(templdais.BottomNavAttrs{Brand: "primary", Items: previewBtmNavItems, Size: "sm", Class: "max-w-[70vw] absolute top-[75px] left-[5%] !m-0"})
+
+			@templdais.BottomNav(templdais.BottomNavAttrs{Brand: "success", Items: previewBtmNavItems, Size: "sm", Class: "max-w-[70vw] absolute top-[175px] left-[5%] !m-0"})
 		</section>
 		<section class="w-full flex justify-end !p-3">
-			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/navbar"), Outline: true, Brand: "accent", Class: "!px-2"},
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/bottom-navigation"), Outline: true, Brand: "accent", Class: "!px-2"},
 				templ.Attributes{"target": "_blank"}) {
 				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
 			}
+
 		</section>
 	</article>
 }
@@ -60,63 +66,64 @@ templ CodeBtmNb() {
 	<article>
 		<h2 class="text-lg font-bold hidden bg-accent">Inline code</h2>
 		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<div class="overflow-x-auto w-full max-w-[75vw]">
 		<pre data-prismjs-copy="Copy" data-prismjs-copy-success="Success!">
-			<code class="language-go overflow-x-auto w-fit">
+			<code class="language-go overflow-x-auto">
 				{ 
-      `@templdais.Accordion(
-      templdais.AccordionAttrs{
-      Name: "my-accordion",
-      Items: []templdais.AccordionItem{
-      {Title: "Accordion Item 1", Content: someComp("1")},
-      {Title: "Accordion Item 2", Content: someComp("2")},
-      {Title: "Accordion Item 3", Content: someComp("3")},
-      },
-      Arrow: true
-      },
-      )` }
+      `@templdais.BottomNav(templdais.BottomNavAttrs{Brand: "primary", Items: []templdais.BtmNavItem{
+	{Body: partials.HomeIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+	{Body: partials.InfoIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+	{Body: partials.ChartIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+}, Size: "lg"})` }
 			</code>
 		</pre>
+		</div>
 		<h2 class="text-lg font-semibold">
 			Fragmented code (with structs outside the parenthesis)
 		</h2>
+		<div class="overflow-x-auto w-full max-w-[75vw]">
 		<pre class="w-full" data-prismjs-copy="Copy" data-prismjs-copy-success="Success!">
 			<code class="language-go w-full">
 				{ 
-      `var attrs = templdais.AccordionAttrs{
-      Name: "my-accordion",
-      Items: []templdais.AccordionItem{
-      {Title: "Accordion Item 1", Content: someComp("1")},
-      {Title: "Accordion Item 2", Content: someComp("2")},
-      {Title: "Accordion Item 3", Content: someComp("3")},
-      },
-      Arrow: true
-      }
+      `var items = []templdais.BtmNavItem{
+	{Body: partials.HomeIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+	{Body: partials.InfoIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+	{Body: partials.ChartIcon(), Button: templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("#")}, Attrs: templ.Attributes{"target": "_blank"}},
+}
 
-      templ MyComponent() {
-      // ...
-      @templdais.Accordion(attrs)
-      // ...
-      }` }
+var attrs = templdais.BottomNavAttrs{
+	Brand: "default",
+	Items: items,
+	Size: "lg"
+}
+
+templ MyComponent() {
+	// ...
+	@templdais.BottemNav(attrs)
+	// ...
+}` }
 			</code>
 		</pre>
+		</div>
 	</article>
 }
 
 templ AttributesBtmNb() {
 	<article>
-		<h2 class="text-md italic font-semilight">templdais.AccordionAttrs</h2>
+		<h2 class="text-md italic font-semilight">templdais.BottomNavAttrs</h2>
 		<table class="hidden table table-zebra"></table>
-		@templdais.Table(tableAccordionAttrs)
+		@templdais.Table(tableBtmNavAttrs)
 	</article>
 	<article class="my-3">
-		<h2 class="text-md italic font-semilight">templdais.AccordionItem</h2>
-		@templdais.Table(tableAccordionItemAttrs)
+		<h2 class="text-md italic font-semilight">templdais.BtmNavItem</h2>
+		@templdais.Table(tableBtmNavItemAttrs)
 	</article>
 }
 
 templ BottomNavPage() {
-	<section class="p-4 w-full">
+	<section class="hidden collapse"></section>
+	<section class="p-4 max-w-full">
 		<h1 class="text-2xl font-bold my-2">Bottom Navigation</h1>
-		@templdais.Accordion(accordionNav)
+		@templdais.Accordion(accordionBtmNav)
 	</section>
 }
