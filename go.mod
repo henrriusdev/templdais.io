@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/a-h/templ v0.2.778
 	github.com/gofiber/fiber/v3 v3.0.0-beta.2
-	github.com/henrriusdev/templdais v1.5.0
+	github.com/henrriusdev/templdais v1.5.6
 )
 
 require (

@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./views/**/*.templ",
-    "../../go/pkg/mod/github.com/henrriusdev/templdais@v1.4.6/**/*.templ",
+    "../../go/pkg/mod/github.com/henrriusdev/templdais@v1.5.6/**/*.templ",
     "C:/Users/henrr/go/pkg/mod/github.com/henrriusdev/templdais@v1.4.3/**/*.templ",
   ],
   theme: {
