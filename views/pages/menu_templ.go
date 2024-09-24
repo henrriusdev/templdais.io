@@ -90,7 +90,7 @@ func PreviewMn() templ.Component {
 			},
 			Size:     "large",
 			Vertical: true,
-			Class:    "bg-base-100 rounded-lg",
+			Class:    "bg-primary rounded-lg",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
