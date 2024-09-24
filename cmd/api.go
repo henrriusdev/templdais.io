@@ -89,6 +89,8 @@ func components(c fiber.Ctx) error {
 		page = pages.DividerPage()
 	case "dropdown":
 		page = pages.DropdownPage()
+	case "kbd":
+		page = pages.KbdPage()
 	case "menu":
 		page = pages.MenuPage()
 	case "navbar":
