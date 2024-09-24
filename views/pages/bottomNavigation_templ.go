@@ -24,25 +24,22 @@ var tableBtmNavAttrs = templdais.TableAttrs{
 	TableName: "templdais.BottomNavAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
-		{"Attribute": "Name", "Type": "string", "Description": "The name of the accordion component", "Default": "empty"},
-		{"Attribute": "Items", "Type": "[]AccordionItem", "Description": "The list of items in the accordion component",
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the bottom navigation", "Default": "empty"},
+		{"Attribute": "Brand", "Type": "string", "Description": "The color brand of the bottom navigation", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]BtmNavItem", "Description": "The list of items in the btm nav component",
 			"Default": "nil"},
-		{"Attribute": "Arrow", "Type": "bool", "Description": "Whether to show an arrow icon next to the title", "Default": "false"},
-		{"Attribute": "PlusMinus", "Type": "bool", "Description": "Wheter to show a plus/minus icon next to the title",
-			"Default": "false"},
 		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion component", "Default": "empty"},
 	},
 	Class: "bg-secondary",
 }
 
-var tableBtmNavMenuAttrs = templdais.TableAttrs{
-	TableName: "templdais.AccordionItem",
+var tableBtmNavItemAttrs = templdais.TableAttrs{
+	TableName: "templdais.BtmNavItem",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
-		{"Attribute": "Title", "Type": "string", "Description": "The title of the accordion item", "Default": "empty"},
-		{"Attribute": "Content", "Type": "templ.Component", "Description": "The content of the accordion item", "Default": "empty"},
-		{"Attribute": "Open", "Type": "bool", "Description": "Whether the accordion item is open by default", "Default": "false"},
-		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the accordion item", "Default": "empty"},
+		{"Attribute": "Body", "Type": "templ.Component", "Description": "The body of the bottom navigation item", "Default": "empty"},
+		{"Attribute": "Button", "Type": "Button", "Description": "The button of the bottom navigation item", "Default": "empty"},
+		{"Attribute": "Attributes", "Type": "templ.Attributes", "Description": "The attributes of the bottom navigation item", "Default": "empty"},
 	},
 	Class: "bg-secondary",
 }
@@ -188,7 +185,7 @@ func CodeBtmNb() templ.Component {
       },
       )`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/bottomNavigation.templ`, Line: 79, Col: 8}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/bottomNavigation.templ`, Line: 76, Col: 8}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -216,7 +213,7 @@ func CodeBtmNb() templ.Component {
       // ...
       }`)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/bottomNavigation.templ`, Line: 102, Col: 8}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/bottomNavigation.templ`, Line: 99, Col: 8}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
