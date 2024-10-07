@@ -1,0 +1,80 @@
+package pages
+
+import "github.com/henrriusdev/templdais"
+
+var accordionKbd = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewKbd(), Open: true},
+		{Title: "Code", Content: CodeKbd()},
+		{Title: "Attributes", Content: AttributesKbd()},
+	},
+	Name:  "accordion-page",
+	Arrow: true,
+}
+
+
+var tableKbdAttrs = templdais.TableAttrs{
+	TableName: "templdais.Kbd",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the kbd", "Default": "empty"},
+    {"Attribute": "Text", "Type": "string", "Description": "The text to show", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewKbd() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4">
+    <p class="text-lg flex justify-center gap-x-2">
+      Press
+      @templdais.Kbd("sm", "Ctrl")
+      +
+      @templdais.Kbd("lg", "C")
+       to copy
+    </p>
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/kbd"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeKbd() {
+	<article>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `<p class="text-lg flex justify-center gap-x-2">
+  Press
+  @templdais.Kbd("sm", "Ctrl")
+  +
+  @templdais.Kbd("lg", "C")
+    to copy
+</p>` }
+			</code>
+		</pre>
+    <p class="text-lg font-semibold">
+      <span class="text-lg font-semibold">P.D.</span> The inline components like <span class="text-lg font-semibold">Kbd</span> must go on separated lines, otherwise it will ecognized as text.
+    </p>
+	</article>
+}
+
+templ AttributesKbd() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.Kbd</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableKbdAttrs)
+	</article>
+}
+
+templ KbdPage() {
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Kbd</h1>
+		@templdais.Accordion(accordionKbd)
+	</section>
+}

@@ -1,6 +1,6 @@
 package pages
 
-import "github.com/hbourgeot/templdais"
+import "github.com/henrriusdev/templdais"
 
 var accordionChkbox = templdais.AccordionAttrs{
 	Items: []templdais.AccordionItem{
@@ -12,7 +12,7 @@ var accordionChkbox = templdais.AccordionAttrs{
 	Arrow: true,
 }
 
-var tableChkboxAttrs = templdais.TableAttrs{
+var tableFormAttrs = templdais.TableAttrs{
 	TableName: "templdais.FormAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
@@ -27,6 +27,8 @@ var tableChkboxAttrs = templdais.TableAttrs{
 
 templ PreviewCb() {
 	<article>
+	<div class="hidden checkbox checkbox-primary checkbox-secondary checkbox-accent checkbox-success checkbox-info checkbox-warning checkbox-error
+	"></div>
 		<section class="ml-10 lg:ml-0 bg-[#000C20] rounded-lg p-10">
 			<label class="flex items-center gap-x-2">
 				@templdais.Checkbox(templdais.FormAttrs{FieldName: "checkbox", FieldID: "checkbox", FieldBordered: true, FieldBrand: "primary"})
@@ -89,20 +91,13 @@ templ AttributesCb() {
 	<article>
 		<h2 class="text-md italic font-semilight">templdais.FormAttrs</h2>
 		<table class="hidden table table-zebra"></table>
-		@templdais.Table(tableBadgeAttrs)
+		@templdais.Table(tableFormAttrs)
 	</article>
 }
 
 templ CheckboxPage() {
-	<div class="hidden checkbox checkbox-primary"></div>
-	<div class="hidden checkbox checkbox-secondary"></div>
-	<div class="hidden checkbox checkbox-accent"></div>
-	<div class="hidden checkbox checkbox-success"></div>
-	<div class="hidden checkbox checkbox-info"></div>
-	<div class="hidden checkbox checkbox-warning"></div>
-	<div class="hidden checkbox checkbox-error"></div>
 	<section class="p-4 w-full">
-		<h1 class="text-2xl font-bold my-2">Alert</h1>
+		<h1 class="text-2xl font-bold my-2">Checkbox</h1>
 		@templdais.Accordion(accordionChkbox)
 	</section>
 }

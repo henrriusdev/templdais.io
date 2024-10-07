@@ -1,8 +1,160 @@
 package pages
 
+import "github.com/henrriusdev/templdais"
+
+var accordionCode = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewCode(), Open: true},
+		{Title: "Code", Content: CodeComponentCode()},
+		{Title: "Attributes", Content: AttributesCode()},
+	},
+	Name:  "code",
+	Arrow: true,
+}
+
+var tableCodeAttrs = templdais.TableAttrs{
+	TableName: "templdais.CodeAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Prefix", "Type": "string", "Description": "The prefix of the code", "Default": "empty"},
+		{"Attribute": "Brand", "Type": "string", "Description": "The text color", "Default": "empty"},
+		{"Attribute": "Text", "Type": "string", "Description": "The example code", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The other classes to apply to the card", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+var tableCode = templdais.TableAttrs{
+	TableName: "templdais.LineCode",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Prefix", "Type": "string", "Description": "The prefix of the code", "Default": "empty"},
+		{"Attribute": "Brand", "Type": "string", "Description": "The text color", "Default": "empty"},
+		{"Attribute": "Text", "Type": "string", "Description": "The example code", "Default": "empty"},
+		{"Attribute": "Size", "Type": "string", "Description": "The size of the code", "Default": "empty"},
+		{"Attribute": "Class", "Type": "string", "Description": "The other classes to apply to the card", "Default": "empty"},
+	},
+	Class: "bg-secondary",
+}
+
+var codes = []templdais.LineCode{
+	{Prefix: "$", Brand: "success", Text: "go run .", Class: "w-[200px]"},
+	{Prefix: "$", Brand: "error", Text: "npm i -D daisyui", Class: "w-[400px]"},
+	{Prefix: "$", Brand: "warning", Text: "npx tailwindcss init -p", Class: "w-[400px]"},
+}
+
+templ PreviewCode() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex justify-center items-start gap-x-4">
+			@templdais.Code(templdais.CodeAttrs{Prefix: "$", Brand: "success", Text: "go run .", Class: "w-[200px]"})
+			@templdais.Code(templdais.CodeAttrs{LineCode: codes, Class: "w-[400px]"})
+		</section>
+		<section class=" w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/accordion"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeComponentCode() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code</h2>
+		<h3 class="text-md italic font-semilight">Single line</h3>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ 
+`@templdais.Code(templdais.CodeAttrs{Prefix: "$", Brand: "success", Text: "go run .", Class: "w-[200px]"})
+` }
+			</code>
+		</pre>
+		<h3 class="text-md italic font-semilight">Multiple lines</h3>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ 
+`@templdais.Code(templdais.CodeAttrs{LineCode: templdais.LineCode{
+	{Prefix: "$", Brand: "success", Text: "go run ."},
+	{Prefix: "$", Brand: "error", Text: "npm i -D daisyui"},
+	{Prefix: "$", Brand: "warning", Text: "npx tailwindcss init -p"},
+}, Class: "w-[400px]"})
+` }
+			</code>
+		</pre>
+		<h2 class="text-lg font-bold">Fragmented code</h2>
+		<h3 class="text-md italic font-semilight">Single line</h3>
+		<pre
+			class="w-full"
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go w-full">
+				{ 
+`var attrs = templdais.CodeAttrs{
+	Prefix: "$",
+	Brand: "success",
+	Text: "go run .",
+	Class: "w-[200px]",
+}
+
+templ MyComponent() {
+	@templdais.Code(attrs)
+}
+` }
+			</code>
+		</pre>
+		<h3 class="text-md italic font-semilight">Multiple lines</h3>
+		<pre
+			class="w-full"
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go w-full">
+				{ 
+`var codes = []templdais.LineCode{
+	{Prefix: "$", Brand: "success", Text: "go run .", Class: "w-[200px]"},
+	{Prefix: "$", Brand: "error", Text: "npm i -D daisyui", Class: "w-[400px]"},
+	{Prefix: "$", Brand: "warning", Text: "npx tailwindcss init -p", Class: "w-[400px]"},
+}
+
+var attrs = templdais.CodeAttrs{
+	Prefix: "$",
+	Brand: "success",
+	Text: "go run .",
+	Class: "w-[200px]",
+	LineCode: codes,
+}
+
+templ MyComponent() {
+	@templdais.Code(attrs)
+}
+` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesCode() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.LineCode</h2>
+		@templdais.Table(tableCode)
+	</article>
+	<article class="my-3">
+		<h2 class="text-md italic font-semilight">templdais.CodeAttrs</h2>
+		@templdais.Table(tableCodeAttrs)
+	</article>
+}
+
 templ CodePage() {
-	<div>
-		<h1>Code</h1>
-		<p>Here is the code for the project</p>
-	</div>
+	<div class="hidden w-[400px]"></div>
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Code Component</h1>
+		@templdais.Accordion(accordionCode)
+		<p class="hidden text-primary text-secondary text-info text-warning text-error text-success"></p>
+	</section>
 }

@@ -7,9 +7,9 @@ import (
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/adaptor"
-	"github.com/hbourgeot/templdais.io/views"
-	"github.com/hbourgeot/templdais.io/views/layout"
-	"github.com/hbourgeot/templdais.io/views/pages"
+	"github.com/henrriusdev/templdais.io/views"
+	"github.com/henrriusdev/templdais.io/views/layout"
+	"github.com/henrriusdev/templdais.io/views/pages"
 )
 
 type HTTPError struct {
@@ -75,14 +75,24 @@ func components(c fiber.Ctx) error {
 		page = pages.BadgePage()
 	case "breadcrumbs":
 		page = pages.BreadcrumbPage()
+	case "bottomNavigation":
+		page = pages.BottomNavPage()
 	case "button":
 		page = pages.ButtonPage()
 	case "card":
 		page = pages.CardPage()
 	case "checkbox":
 		page = pages.CheckboxPage()
+	case "code":
+		page = pages.CodePage()
 	case "divider":
 		page = pages.DividerPage()
+	case "dropdown":
+		page = pages.DropdownPage()
+	case "fileInput":
+		page = pages.FileInputPage()
+	case "kbd":
+		page = pages.KbdPage()
 	case "menu":
 		page = pages.MenuPage()
 	case "navbar":

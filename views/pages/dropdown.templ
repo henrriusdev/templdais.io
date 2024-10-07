@@ -1,0 +1,121 @@
+package pages
+
+import "github.com/henrriusdev/templdais"
+
+var accordionDropdown = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewDd(), Open: true},
+		{Title: "Code", Content: CodeDd()},
+		{Title: "Attributes", Content: AttributesDd()},
+	},
+	Name:  "dropdown-page",
+	Arrow: true,
+}
+
+var tableDropdownAttrs = templdais.TableAttrs{
+	TableName: "templdais.DropdownAttrs",
+	Columns:   []string{"Attribute", "Type", "Description", "Default"},
+	Rows: []map[string]string{
+		{"Attribute": "Position", "Type": "string", "Description": "The position of the menu", "Default": "bottom"},
+		{"Attribute": "End", "Type": "bool", "Description": "Align the menu to the end", "Default": "false"},
+		{"Attribute": "Hover", "Type": "bool", "Description": "Enable the hover effect", "Default": "false"},
+		{"Attribute": "Class", "Type": "string", "Description": "The class to apply to the alert", "Default": "empty"},
+		{"Attribute": "Items", "Type": "[]Links", "Description": "The items to show", "Default": "empty"},
+		{"Attribute": "BtnBrand", "Type": "string", "Description": "The brand of the button", "Default": "primary"},
+		{"Attribute": "BtnSize", "Type": "string", "Description": "The size of the button", "Default": "md"},
+	},
+	Class: "bg-secondary",
+}
+
+templ PreviewDd() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-4">
+			@templdais.DropdownMenu(templdais.DropdownAttrs{
+				Items: []templdais.Links{
+					{Text: "Home", Href: templ.SafeURL("#")},
+					{Text: "About responsive menu", Href: templ.SafeURL("#")},
+					{Text: "Contact", Href: templ.SafeURL("#")},
+				},
+				Class:    "!bg-accent text-black",
+				BtnBrand: "accent",
+				BtnSize:  "md",
+			}) {
+				Click me
+			}
+		</section>
+		<section class="w-full flex justify-end !p-3">
+			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/dropdown"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+			}
+		</section>
+	</article>
+}
+
+templ CodeDd() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `@templdais.DropdownMenu(templdais.DropdownAttrs{
+	Items: []templdais.Links{
+		{Text: "Home", Href: templ.SafeURL("#")},
+		{Text: "About responsive menu", Href: templ.SafeURL("#")},
+		{Text: "Contact", Href: templ.SafeURL("#")},
+	},
+	Class: "bg-primary",
+	BtnBrand: "accent",
+	BtnSize: "sm",
+}) {
+	Here comes the content or text
+}` }
+			</code>
+		</pre>
+		<h2 class="text-lg font-bold">Fragmented code (with structs outside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `var attrs = ttempldais.DropdownAttrs{
+	Items: []templdais.Links{
+		{Text: "Home", Href: templ.SafeURL("#")},
+		{Text: "About responsive menu", Href: templ.SafeURL("#")},
+		{Text: "Contact", Href: templ.SafeURL("#")},
+	},
+	Class: "bg-primary",
+	BtnBrand: "accent",
+	BtnSize: "sm",
+}
+	
+templ MyComponent() {
+	// ...
+	@templdais.DropdownMenu(attrs) {
+		Here comes the content or text
+	}
+	// ...
+}` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesDd() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.DropdownAttrs</h2>
+		<table class="hidden table table-zebra"></table>
+		@templdais.Table(tableDropdownAttrs)
+		<h2 class="text-md italic font-semilight mt-4">templdais.Links</h2>
+		@templdais.Table(tableLinks)
+	</article>
+}
+
+templ DropdownPage() {
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">Dropdown Menu</h1>
+		@templdais.Accordion(accordionDropdown)
+	</section>
+	<div class="bg-accent hidden"></div>
+}
