@@ -12,7 +12,7 @@ var accordionChkbox = templdais.AccordionAttrs{
 	Arrow: true,
 }
 
-var tableChkboxAttrs = templdais.TableAttrs{
+var tableFormAttrs = templdais.TableAttrs{
 	TableName: "templdais.FormAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
@@ -91,7 +91,7 @@ templ AttributesCb() {
 	<article>
 		<h2 class="text-md italic font-semilight">templdais.FormAttrs</h2>
 		<table class="hidden table table-zebra"></table>
-		@templdais.Table(tableBadgeAttrs)
+		@templdais.Table(tableFormAttrs)
 	</article>
 }
 

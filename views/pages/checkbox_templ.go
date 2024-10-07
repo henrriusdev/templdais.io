@@ -20,7 +20,7 @@ var accordionChkbox = templdais.AccordionAttrs{
 	Arrow: true,
 }
 
-var tableChkboxAttrs = templdais.TableAttrs{
+var tableFormAttrs = templdais.TableAttrs{
 	TableName: "templdais.FormAttrs",
 	Columns:   []string{"Attribute", "Type", "Description", "Default"},
 	Rows: []map[string]string{
@@ -208,7 +208,7 @@ func AttributesCb() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templdais.Table(tableBadgeAttrs).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templdais.Table(tableFormAttrs).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

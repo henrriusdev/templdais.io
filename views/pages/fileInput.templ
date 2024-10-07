@@ -1,5 +1,82 @@
 package pages
 
-templ FileInputPage(){
-  <h1>File Input</h1>
+import "github.com/henrriusdev/templdais"
+
+var accordionFInput = templdais.AccordionAttrs{
+	Items: []templdais.AccordionItem{
+		{Title: "Preview", Content: PreviewFi(), Open: true},
+		{Title: "Code", Content: CodeFi()},
+		{Title: "Attributes", Content: AttributesFi()},
+	},
+	Name:  "file-input-page",
+	Arrow: true,
+}
+var finput = templdais.FileInputAttrs{
+
+}
+
+templ PreviewFi() {
+	<article>
+		<section class="ml-10 lg:ml-0 bg-[#000C20] rounded-lg p-10 flex justify-between flex-wrap gap-2">
+			<label class="flex flex-col items-start gap-y-2">
+                Upload a file
+            @templdais.FileInput(templdais.FileInputAttrs{Brand: "primary", Size: "sm", Border: "blue"}, templ.Attributes{})
+            </label>
+            <label class="flex flex-col items-start gap-y-2">
+                Upload a file
+            @templdais.FileInput(templdais.FileInputAttrs{Brand: "info", Size: "sm", Border: "blue"}, templ.Attributes{})
+            </label>
+            <label class="flex flex-col items-start gap-y-2">
+                Upload a file
+            @templdais.FileInput(templdais.FileInputAttrs{Brand: "success", Size: "sm", Border: "blue"}, templ.Attributes{})
+            </label>
+            <label class="flex flex-col items-start gap-y-2">
+                Upload a file
+            @templdais.FileInput(templdais.FileInputAttrs{Brand: "info", Size: "sm", Border: "blue"}, templ.Attributes{})
+            </label>
+            <label class="flex flex-col items-start gap-y-2">
+                Upload a file
+            @templdais.FileInput(templdais.FileInputAttrs{Brand: "warning", Size: "sm", Border: "blue"}, templ.Attributes{})
+            </label>
+            <label class="flex flex-col items-start gap-y-2">
+                Upload a file
+            @templdais.FileInput(templdais.FileInputAttrs{Brand: "error", Size: "sm", Border: "blue"}, templ.Attributes{})
+            </label>
+		</section>
+		<section class="w-full flex justify-end !p-3">
+        			@templdais.Button(templdais.ButtonAttrs{Type: "anchor", Link: templ.SafeURL("https://daisyui.com/components/fileinput"), Outline: true, Brand: "accent", Class: "!px-2"}, templ.Attributes{"target": "_blank"}) {
+        				View on DaisyUI <i class="fas fa-external-link-alt ml-2"></i>
+        			}
+        		</section>
+	</article>
+}
+
+templ CodeFi() {
+	<article>
+		<h2 class="text-lg font-bold">Inline code (with structs inside the parenthesis)</h2>
+		<pre
+			data-prismjs-copy="Copy"
+			data-prismjs-copy-success="Success!"
+		>
+			<code class="language-go overflow-x-auto w-fit">
+				{ `
+@templdais.FileInput(templdais.FileInputAttrs{Brand: "primary", Size: "sm", Border: "blue"}, templ.Attributes{})` }
+			</code>
+		</pre>
+	</article>
+}
+
+templ AttributesFi() {
+	<article>
+		<h2 class="text-md italic font-semilight">templdais.FormAttrs</h2>
+		<table class="hidden table table-zebra file-input-success file-input-accent file-input-info file-input-warning file-input-error"></table>
+		@templdais.Table(tableFormAttrs)
+	</article>
+}
+
+templ FileInputPage() {
+	<section class="p-4 w-full">
+		<h1 class="text-2xl font-bold my-2">FileInput</h1>
+		@templdais.Accordion(accordionFInput)
+	</section>
 }
